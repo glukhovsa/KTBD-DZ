@@ -6,8 +6,8 @@
 import cx_Oracle
 from pprint import pprint as pp
 con_db_data={
-  'db_user' : "GLUHX",
-  'db_password' : "gluhx",
+  'db_user' : "guest",
+  'db_password' : "iu4",
   'db_host' : "localhost",
   'db_port' : 1521,
   'db_service_name' : "FREE"
@@ -32,7 +32,7 @@ app = Flask(__name__)
 #QRcode(app)
 
 #библиотека для шифрования данных
-#import hashlib
+import hashlib
 
 #библиотека для работы с файлами
 #from fpdf import FPDF
@@ -104,15 +104,30 @@ def main():
         return redirect('/login')
     return "0"
 
-#модуль авторизации
+########### модуль авторизации ############
+
+#вход на сайт
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-    if not request.cookies.get('auth_try'):
-        login_status = {'try': False, 'same user': False, 'full data': False}
-    else:
-       login_status = {'try': eval(request.cookies.get('auth_try')),
-                       'full data': eval(request.cookies.get('auth_not_full_data'))}
-    return render_template("login.html", login_status=login_status)
+  if request.method == 'POST':
+    login_data = {'try' : True, 'login': request.form['user_login'], 'password' : request.form['user_password']}
+    login_data['password'] = hashlib.md5(login_data['password'].encode())
+    login_data['password'] = login_data['password'].hexdigest()
+    con_db = connect_to_db()
+    cursor = con_db.cursor()
+
+    check_login = 'SELECT * FROM SYS.AUTH_USERS WHERE User_Login = \''+ login_data['login']+'\' AND User_Password = \''+ login_data['password']+'\''
+    cursor.execute(check_login)
+    login_result = cursor.fetchall()
+
+    cursor.close()
+    con_db.close()
+    print(len(login_result))
+    if len(login_result) == 1:
+      return redirect('/')
+  else:
+    login_data = {'try' : True, 'login': False, 'password' : False, 'error' : None}
+    return render_template("login.html", login_data=login_data)
 
 #заруск Web приложения
 if __name__ == '__main__':
