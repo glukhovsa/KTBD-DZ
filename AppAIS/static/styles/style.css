@@ -1,0 +1,17 @@
+.square {
+    position: absolute;
+    top:  50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    height: 350px;
+    width: 500px;
+    background-color: #bdb0b05b;
+    text-align: center;
+    border-radius: 50px;
+}
+.footer {
+    margin-top: auto;
+    position: fixed;
+    bottom: 0;
+    color:blue;
+}
