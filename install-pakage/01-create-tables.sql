@@ -1,10 +1,3 @@
-PROMPT Создаём пользователя для пользовательского общения с БД
-DROP USER guest;
-CREATE USER guest IDENTIFIED BY iu4;
-GRANT CONNECT TO guest;
-
-
-
 PROMPT Модуль авторизации:
 PROMPT Создаём таблицу пользователей
 
@@ -36,5 +29,3 @@ INSERT INTO AUTH_USERS (
     User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Number, User_Email, User_Role)
     VALUES (S_AUTH_USERS.NEXTVAL, 'gluhx', 'Stepan', 'Gluhov', '085ccfa329241ca2f35b684caf376e1f', 
         '+79254144429', 'stepa.gl@yandex.ru', 'admin');
-
-GRANT SELECT ON AUTH_USERS TO guest;

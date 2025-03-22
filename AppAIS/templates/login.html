@@ -3,7 +3,8 @@
     <head>
         <meta charset="UTF-8">
         <title>Авторизация</title>
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/style.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/login.css') }}">
     </head>
     <body>
         <div class="square">
@@ -14,8 +15,11 @@
                 <p>Введите пароль:</p>  <input type="text" name="user_password" placeholder="Пароль"><br>
                 <input type="submit" value="Войти">
             </form>
+            {% if login_data['error_data'] %}
+                <div class="error_auth">Неверный логин или пароль</div>
+            {% endif %}
         </div>
         
-        <div class="footer">Конец страницы</div>
+        <footer class="footer">Может по пиву?</footer>
     </body>
 </html>

@@ -1,0 +1,44 @@
+.footer {
+    background-color: #d5d6f0;
+     position: fixed;
+     right: 0;
+     bottom: 0;
+     text-align: center; 
+     width: 100%;   
+     font-size: 25px;
+    font-weight: bold;
+    color: #7a9dbd;  
+}
+.header {
+    background-color: #d5d6f0;
+    position: fixed;
+    left: 0;
+    top: 0;
+    text-align: center; 
+    width: 100%;
+    height: 55px; 
+    font-weight: bold;
+    color: #7a9dbd;  
+}
+.main_header{
+    position: absolute;
+    font-size: 35px;
+    width: 400px;
+    height: 55px;
+    top: 0px;
+    left: 2px;
+    border: none;
+    background-color: #d5d6f0;
+    color: #7a9dbd;  
+}
+.user_circle{
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    top: 2px;
+    right: 2px;
+    border: none;
+    background-image: url(/static/image/user.png);
+    background-size: cover;
+}

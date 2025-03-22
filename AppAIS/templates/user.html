@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Данные пользователя</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/user.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <form action="/"><input type="submit" class="main_header" value="Главная страница"></input></form> 
+            <a href="/user" class="user_circle" value=""></a>
+        </div>
+
+        <div class="square_user_data_personal">
+            <p style="padding: 1% 15% 0%; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60); text-align: center;">Личные данные</p>
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);">Имя: {{user_data['name']}}</p>
+            <p style="padding: 1% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);">Фамилия: {{user_data['last name']}}</p>
+            <p style="padding: 1% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);">Логин: {{user_data['login']}}</p>
+            <p style="padding: 1% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);">Должность: 
+                {%if user_data['role'] == 'admin'%}
+                    Администратор
+                {%elif user_data['role'] == 'guest'%}
+                    Гость нашей организации
+                {%elif user_data['role'] == 'director'%}
+                    Технический директор
+                {%elif user_data['role'] == 'technologist'%}
+                    Технолог
+                {%elif user_data['role'] == 'engineer'%}
+                    Инженер-конструктор
+                {% endif %}
+            </p>
+        </div>
+
+        <div class="square_user_data_contact">
+            <p style="padding: 1% 15% 0%; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60); text-align: center;">Контактные данные</p>
+            <p style="padding: 0% 15% 1%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);">Телефон: {{user_data['phone']}}</p>
+            <p style="padding: 1% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);">Электронная почта: {{user_data['email']}}</p>
+            <p style="padding: 1% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 56, 14); text-align: center;">
+                Эти данный помогут другим сотрудникам найти вас. Отвечайте на звонки и чаще проверяйте почту!
+            </p>
+        </div>      
+        
+        <form action="/logout"><input type="submit" class="logout" value="Выйти из аккаунта"></input></form> 
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>
