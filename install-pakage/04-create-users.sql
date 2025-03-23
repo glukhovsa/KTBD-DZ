@@ -3,18 +3,26 @@ DROP USER guest;
 CREATE USER guest IDENTIFIED BY iu4;
 GRANT CONNECT TO guest;
 GRANT SELECT ON AUTH_USERS TO guest;
+GRANT INSERT ON AUTH_USERS TO guest;
+GRANT SELECT ON S_AUTH_USERS TO guest;
+GRANT ALTER ON S_AUTH_USERS TO guest;
 
 PROMPT Создаём пользователя тех директора
 DROP USER director;
 CREATE USER director IDENTIFIED BY qpalzm;
-GRANT CONNECT TO guest;
+GRANT CONNECT TO director;
+GRANT SELECT ON AUTH_USERS TO director;
 
 PROMPT Создаём пользователя технолога
 DROP USER technologist;
 CREATE USER technologist IDENTIFIED BY qwerty;
-GRANT CONNECT TO guest;
+GRANT CONNECT TO technologist;
+GRANT SELECT ON AUTH_USERS TO technologist;
 
-PROMPT Создаём пользователя инженера
+PROMPT Создаём пользователя инженера-конструктора
 DROP USER engineer;
 CREATE USER engineer IDENTIFIED BY ijhgfdsaw;
-GRANT CONNECT TO guest;
+GRANT CONNECT TO engineer;
+GRANT SELECT ON AUTH_USERS TO engineer;
+
+quit;

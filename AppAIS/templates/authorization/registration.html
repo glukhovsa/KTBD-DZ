@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Данные пользователя</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/authorization/registration.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <form action="/login"><input type="submit" class="login" value="Войти на сайт"></input></form>
+        </div>
+        
+        {% if error['?'] %}
+            <div class="error_reg">{{error['text']}}</div>
+        {% endif %}
+
+        <div class="square">
+            <form method="post">            
+                <p>Ваш логин:</p>   <input type="text" name="user_login" placeholder="Обязательное поле"><br>
+                <p>Ваше имя:</p>  <input type="text" name="user_name" placeholder="Обязательное поле"><br>
+                <p>Ваша фамилия:</p>  <input type="text" name="user_last_name" placeholder="Обязательное поле"><br>
+                <p>Введите пароль:</p>  <input type="text" name="user_password" placeholder="Обязательное поле"><br>          
+                <p>Ваш телефон:</p>   <input type="text" name="user_phone" placeholder="Лучше заполнить"><br>
+                <p>Ваша почта:</p>  <input type="text" name="user_email" placeholder="Лучше заполнить"><br>
+                <p>Ваша должность:</p>  <select id="user_role" name="user_role">
+                    <option value="admin">Администратор</option>
+                    <option value="director">Технический директор</option>
+                    <option value="technologist">Технолог</option>
+                    <option value="engineer">Инженер-конструктор</option>
+                    <option value="guest">Гость нашего сайта</option>
+                  </select>
+                <input type="submit" value="Зарегистрироваться" style="position: absolute; left: 130px; bottom: 15px;">
+            </form>
+        </div>      
+        
+        <form action="/logout"><input type="submit" class="logout" value="Выйти из аккаунта"></input></form> 
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>
