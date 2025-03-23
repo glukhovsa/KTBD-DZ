@@ -34,6 +34,9 @@ app = Flask(__name__)
 #модуль авторизации
 import authorization as auth
 
+#модуль инженера-конструктора
+import engineer as eng
+
 #подключение файла с удобными функциями
 import function as func
 
@@ -70,6 +73,13 @@ def logout():
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():
   return auth.registration()
+
+############# модуль инженера ##############
+
+#страница со всеми устройствами
+@app.route('/all_devices')
+def devices():
+   return eng.all_devices()
 
 #заруск Web приложения
 if __name__ == '__main__':

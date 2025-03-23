@@ -46,7 +46,8 @@ CREATE TABLE ENG_COMPONENT_LIB (
     Component_Class_ID      NUMBER      NOT NULL,
     Component_PartNumber    VARCHAR(30) NOT NULL,
     Component_Instalation   VARCHAR(3)  NOT NULL,
-    Component_Manufacturer  VARCHAR(30) NULL
+    Component_Manufacturer  VARCHAR(30) NULL,
+    Component_Count_Pad     NUMBER      NOT NULL
 );
 
 ALTER TABLE ENG_COMPONENT_LIB

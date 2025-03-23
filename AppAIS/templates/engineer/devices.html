@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Данные пользователя</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/engineer/devices.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <form action="/"><input type="submit" class="main_header" value="Главная страница"></input></form> 
+            <a href="/user" class="user_circle" value=""></a>
+        </div>
+
+        <div class="devices">
+            <p style="margin-top:100px; margin-left: 50px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">Список устройств:</p>
+            <div class="device_header">
+                <div class="device_name">Имя устройства</div>
+                <div class="device_about">Описание</div>
+                <div class="device_TP">Тех процесс</div>
+                <div class="device_count">Кол-во элементов</div>
+            </div>
+            {% if devices_data != {} %}
+                {% for device in devices_data %}
+                    <div onclick="window.location.href='/device/{{device['id']}}'" class="device">
+                        <div class="device_name"><a>{{device['name']}}</div>
+                        <div class="device_about">{{device['about'][0:35]+'...'}}</div>
+                        <div class="device_TP">
+                            {% if device['TP'] == '' or device['TP'] == None %}
+                                Пока не прикреплён
+                            {% else %}
+                                {{device['TP']}}
+                            {% endif %}
+                        </div>
+                        <div class="device_count">{{device['count']}}</div>
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>

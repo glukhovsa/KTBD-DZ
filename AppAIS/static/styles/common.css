@@ -14,7 +14,6 @@
     position: fixed;
     left: 0;
     top: 0;
-    text-align: center; 
     width: 100%;
     height: 55px; 
     font-weight: bold;
@@ -41,4 +40,15 @@
     border: none;
     background-image: url(/static/image/user.png);
     background-size: cover;
+}
+.main_devices{
+    position: absolute;
+    font-size: 35px;
+    width: 400px;
+    height: 55px;
+    top: 0px;
+    left: 2px;
+    border: none;
+    background-color: #d5d6f0;
+    color: #7a9dbd;  
 }

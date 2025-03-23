@@ -1,0 +1,72 @@
+.devices {
+    margin-top: 200px;
+    margin-left: 5%;
+    width: 90%;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+}
+.device {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 70px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.device_header {
+    margin-top: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 40px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.device_name{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5%;
+    width: 20%;
+    height: 90%;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.device_about{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 25%;
+    width: 30%;
+    height: 90%;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.device_TP{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 55%;
+    width: 10%;
+    height: 90%;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.device_count{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 67%;
+    width: 10%;
+    height: 90%;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}

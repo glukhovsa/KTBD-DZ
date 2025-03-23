@@ -3,87 +3,87 @@ PROMPT Заполняем таблицы модуля Engineer
 INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About, Device_Component_Count, Device_TechProcess_ID)
     VALUES(S_ENG_DEVICE.NEXTVAL, 'The device protects the room from flooding and leaks', 
         'This device helps to protect the room from the negative effects of spilled water',
-        0, '');
+        78, '');
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Converters'),
-        'Buzzer SPT-1750A', 'SMD', 'KEPO');
+        'Buzzer SPT-1750A', 'SMD', 'KEPO', 2);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Condensators'),
-        'Ceramic 50V 0603', 'SMD', 'Murata');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'Ceramic 50V 0603', 'SMD', 'Murata', 2);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Condensators'),
-        'Electrolite 9V', 'SMD', 'Murata');
+        'Electrolite 9V', 'SMD', 'Murata', 2);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Analog Chips'),
-        'TP4056', 'SMD', 'UMW');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'TP4056', 'SMD', 'UMW', 8);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Analog Chips'),
-        'DW01A', 'SMD', 'PUOLOP');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'DW01A', 'SMD', 'PUOLOP', 6);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Analog Chips'),
-        'FS82005A', 'SMD', 'FUXINSEMI');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'FS82005A', 'SMD', 'FUXINSEMI', 6);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Analog Chips'),
-        'NCP114ASN330T1G', 'SMD', 'ON Semiconductors');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'NCP114ASN330T1G', 'SMD', 'ON Semiconductors', 5);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Analog Chips'),
-        'MT3608', 'SMD', 'AEROSEMI');
+        'MT3608', 'SMD', 'AEROSEMI', 6);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Digital Chips'),
-        'ESP-01S', 'SMD', 'XIND');
+        'ESP-01S', 'SMD', 'XIND', 22);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Converters'),
-        'EK-HL1206RGBWY Blue', 'SMD', 'SmartModule');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'EK-HL1206RGBWY Blue', 'SMD', 'SmartModule', 2);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Converters'),
-        'EK-HL1206RGBWY Green', 'SMD', 'SmartModule');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'EK-HL1206RGBWY Green', 'SMD', 'SmartModule', 2);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Converters'),
-        'EK-HL1206RGBWY Yellow', 'SMD', 'SmartModule');
+        'EK-HL1206RGBWY Yellow', 'SMD', 'SmartModule', 2);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Inductors'),
-        'SPQ105-220M', 'SMD', 'CODACA');
+        'SPQ105-220M', 'SMD', 'CODACA', 2);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Resistors'),
-        'RC-0603FR', 'SMD', 'Yageo');
+        'RC-0603FR', 'SMD', 'Yageo', 2);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Switches'),
-        'KLS7-TS6604-4.3-180', 'SMD', 'KLS electronic');
+        'KLS7-TS6604-4.3-180', 'SMD', 'KLS electronic', 4);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Diods'),
-        'Shottki 15MQ040N', 'SMD', 'Hottech');
+        'Shottki 15MQ040N', 'SMD', 'Hottech', 2);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Field effect Transistors'),
-        'AO3422A', 'SMD', 'UMW');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'AO3422A', 'SMD', 'UMW', 3);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Field effect Transistors'),
-        'FND352AP', 'SMD', 'UMW');
+        'FND352AP', 'SMD', 'UMW', 3);
 
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Connectors'),
-        'JST XH2.0 6PIN', 'THT', 'JST Corporation');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'JST XH2.0 6PIN', 'THT', 'JST Corporation', 6);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Connectors'),
-        'JST XH2.0 2PIN', 'THT', 'JST Corporation');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'JST XH2.0 2PIN', 'THT', 'JST Corporation', 2);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Connectors'),
-        'MF3-1x03RA', 'THT', 'KLS electronic');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'MF3-1x03RA', 'THT', 'KLS electronic', 3);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Connectors'),
-        'MF3-1x02RA', 'THT', 'KLS electronic');
-INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer)
+        'MF3-1x02RA', 'THT', 'KLS electronic', 2);
+INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Connectors'),
-    'PLS 2.54 1x4pin', 'THT', 'Connfly electronic');
+    'PLS 2.54 1x4pin', 'THT', 'Connfly electronic', 4);
 
 INSERT INTO ENG_COMPONENT (Component_ID, Component_ID_in_Lib, Component_Device_ID, Component_Designator, Component_Nominal)
     VALUES (S_ENG_COMPONENT.NEXTVAL, (SELECT Lib_Component_ID FROM ENG_COMPONENT_LIB WHERE Component_PartNumber = 'Buzzer SPT-1750A'),
