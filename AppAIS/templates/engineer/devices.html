@@ -37,7 +37,18 @@
                             <div onclick="window.location.href='/device/delete/{{device['id']}}'" class="delete_device">-</div>
                         {% endif %}
                     </div>
+                    
                 {% endfor %}
+            {% endif %}
+            {% if role == 'engineer' or role == 'director' %}
+                <div class="device_add">
+                    <form action="/all-devices" method="post">
+                        <p>Новое устройство:</p>
+                        <input type="text" name="device_name" placeholder="Имя устройства"><br>
+                        <input type="textarea" name="device_about" placeholder="Описание"><br>
+                        <input type="submit" value="Добавить">
+                    </form>
+                </div>
             {% endif %}
         </div>
         

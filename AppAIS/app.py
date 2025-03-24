@@ -84,7 +84,7 @@ def registration():
 ############# модуль инженера ##############
 
 #страница со всеми устройствами
-@app.route('/all-devices')
+@app.route('/all-devices', methods=['POST', 'GET'])
 def devices():
    return eng.all_devices()
 

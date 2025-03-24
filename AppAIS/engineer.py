@@ -30,10 +30,22 @@ def all_devices():
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
 
+    if request.method == 'POST':
+            role = func.get_role(request.cookies.get('auth_login'))
+            if role == 'engineer' or role == 'director':
+                con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
+                cursor  = con_db.cursor()
+                cursor.execute('INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About, Device_Component_Count, Device_TechProcess_ID) \
+                            VALUES (S_ENG_DEVICE.NEXTVAL, \''+request.form['device_name']+'\', \''+ request.form['device_about']+'\',0,\'\')')
+                con_db.commit()
+                cursor.close()
+                con_db.close()
+
     con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
     cursor  = con_db.cursor()
     devices_data = []
     cursor.execute('SELECT Device_ID FROM ENG_DEVICE')
+    print
     devices = cursor.fetchall()
     if len(devices) > 0:
         devices = devices[0]
@@ -57,6 +69,7 @@ def all_devices():
     
     cursor.close()
     con_db.close()
+
     return render_template("engineer/devices.html", devices_data=devices_data, role=func.get_role(request.cookies.get('auth_login')))
 
 #Страница удаления устройства
@@ -76,7 +89,7 @@ def delete_device(id):
         con_db.commit()
         cursor.close()
         con_db.close()
-        return redirect('/all_devices')
+        return redirect('/all-devices')
 
 #Страница каждого устройства
 def device(id):
