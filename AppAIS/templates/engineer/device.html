@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Устройство</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/engineer/device.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <form action="/"><input type="submit" class="main_header" value="Главная страница"></input></form> 
+            {% if role == 'engineer' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
+        </div>
+        
+        <div class="device">
+            <p style="padding: 5% 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Устройство: {{device_data['name']}}</p>
+            <p style="padding: 0% 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Описание: {{device_data['about']}}</p>
+            <p style="padding: 0% 10% 5%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Количество компонентов: {{device_data['count']}}</p>
+        </div>
+        <div class="tech_process">
+            Технологический процесс
+            {% if device_data['TP'] != None %}
+                <p>Ещё не назначен</p>
+            {% else %}
+                <img src="{{ qrcode('/techical-process/1{{device_data[\'TP\']}}') }}">
+            {% endif %}
+        </div>
+
+        <div class="components">
+            <p style="margin-top:100px; margin-left: 50px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">Список устройств:</p>
+            <div class="device_header">
+                <div class="device_name">Имя устройства</div>
+                <div class="device_about">Описание</div>
+                <div class="device_TP">Тех процесс</div>
+                <div class="device_count">Кол-во элементов</div>
+            </div>
+            {% if devices_data != {} %}
+                {% for device in devices_data %}
+                    <div class="device">
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_name"><a>{{device['name']}}</div>
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_about">{{device['about'][0:35]+'...'}}</div>
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_TP">
+                            {% if device['TP'] == '' or device['TP'] == None %}
+                                Пока не прикреплён
+                            {% else %}
+                                {{device['TP']}}
+                            {% endif %}
+                        </div>
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_count">{{device['count']}}</div>
+                        {% if role == 'engineer' or role == 'director' %}
+                            <div onclick="window.location.href='/device/delete/{{device['id']}}'" class="delete_device">-</div>
+                        {% endif %}
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+            {% if role == 'engineer' or role == 'director' %}
+                <div class="device_add">
+                    <form action="/add-device" method="post">
+                        <p>Новое устройство:</p>
+                        <input type="text" name="device_name" placeholder="Имя устройства"><br>
+                        <input type="textarea" name="device_about" placeholder="Описание"><br>
+                        <input type="submit" value="Добавить">
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>

@@ -14,9 +14,11 @@ from flask import request
 from flask import redirect
 from flask import make_response
 from flask import send_file
-#from flask_qrcode import QRcode
+
+#библиотека работы в QR
+from flask_qrcode import QRcode
 app = Flask(__name__)
-#QRcode(app)
+QRcode(app)
 
 #библиотека для работы с файлами
 #from fpdf import FPDF
@@ -84,7 +86,7 @@ def registration():
 ############# модуль инженера ##############
 
 #страница со всеми устройствами
-@app.route('/all-devices', methods=['POST', 'GET'])
+@app.route('/all-devices')
 def devices():
    return eng.all_devices()
 
@@ -97,6 +99,11 @@ def delete_device(id):
 @app.route('/device/<id>')
 def device(id):
    return eng.device(id)
+
+#страница добавления устройства
+@app.route('/add-device', methods=['POST'])
+def add_device():
+   return eng.add_device()
 
 #заруск Web приложения
 if __name__ == '__main__':
