@@ -22,10 +22,10 @@
 .main_header{
     position: absolute;
     font-size: 35px;
-    width: 400px;
+    width: 20%;
     height: 55px;
     top: 0px;
-    left: 2px;
+    left: 1%;
     border: none;
     background-color: #d5d6f0;
     color: #7a9dbd;  
@@ -41,13 +41,35 @@
     background-image: url(/static/image/user.png);
     background-size: cover;
 }
-.main_devices{
+.eng_devices{
     position: absolute;
     font-size: 35px;
-    width: 400px;
-    height: 55px;
+    width: 17%;
+    height: 90%;
     top: 0px;
-    left: 2px;
+    left: 25%;
+    border: none;
+    background-color: #d5d6f0;
+    color: #7a9dbd;  
+}
+.eng_lib{
+    position: absolute;
+    font-size: 35px;
+    width: 15%;
+    height: 90%;
+    top: 0px;
+    left: 50%;
+    border: none;
+    background-color: #d5d6f0;
+    color: #7a9dbd;  
+}
+.eng_help{
+    position: absolute;
+    font-size: 35px;
+    width: 15%;
+    height: 90%;
+    top: 0px;
+    left: 70%;
     border: none;
     background-color: #d5d6f0;
     color: #7a9dbd;  

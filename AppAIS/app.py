@@ -46,11 +46,18 @@ import function as func
 ###########################################
 @app.route('/')
 def main():
-    #проверка авторизации
-    if request.cookies.get('auth_status') != 'True':
-        return redirect('/login')
-    role = func.get_role(request.cookies.get('auth_login'))
-    return render_template("main.html", role=role)
+  #проверка авторизации
+  if request.cookies.get('auth_status') != 'True':
+      return redirect('/login')
+  role = func.get_role(request.cookies.get('auth_login'))
+  return render_template("main.html", role=role)
+
+@app.route('/all')
+def all():
+  #проверка авторизации
+  if request.cookies.get('auth_status') != 'True':
+      return redirect('/login')
+  return render_template("all.html", role = func.get_role(request.cookies.get('auth_login')))
 
 ########### модуль авторизации ############
 
@@ -77,9 +84,19 @@ def registration():
 ############# модуль инженера ##############
 
 #страница со всеми устройствами
-@app.route('/all_devices')
+@app.route('/all-devices')
 def devices():
    return eng.all_devices()
+
+#удаление устройства
+@app.route('/device/delete/<id>')
+def delete_device(id):
+   return eng.delete_device(id)
+
+#страница каждого устройства
+@app.route('/device/<id>')
+def device(id):
+   return eng.device(id)
 
 #заруск Web приложения
 if __name__ == '__main__':

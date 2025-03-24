@@ -22,19 +22,21 @@
             </div>
             {% if devices_data != {} %}
                 {% for device in devices_data %}
-                    <div onclick="window.location.href='/device/{{device['id']}}'" class="device">
-                        <div class="device_name"><a>{{device['name']}}</div>
-                        <div class="device_about">{{device['about'][0:35]+'...'}}</div>
-                        <div class="device_TP">
+                    <div class="device">
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_name"><a>{{device['name']}}</div>
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_about">{{device['about'][0:35]+'...'}}</div>
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_TP">
                             {% if device['TP'] == '' or device['TP'] == None %}
                                 Пока не прикреплён
                             {% else %}
                                 {{device['TP']}}
                             {% endif %}
                         </div>
-                        <div class="device_count">{{device['count']}}</div>
+                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_count">{{device['count']}}</div>
+                        {% if role == 'engineer' or role == 'director' %}
+                            <div onclick="window.location.href='/device/delete/{{device['id']}}'" class="delete_device">-</div>
+                        {% endif %}
                     </div>
-                    
                 {% endfor %}
             {% endif %}
         </div>

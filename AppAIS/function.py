@@ -55,35 +55,15 @@ con_db_data = {
 #подключение к БД
 def connect_to_db(role):
   # connection to database
-  if role != 'admin':
-    dsn_con = cx_Oracle.makedsn(
-        con_db_data[role]['db_host'], 
-        con_db_data[role]['db_port'], 
-        service_name = con_db_data[role]['db_service_name']
-    )
-    connection = cx_Oracle.connect(
-        user = con_db_data[role]['db_user'],
-        password = con_db_data[role]['db_password'],
-        dsn = dsn_con,
-        encoding = "UTF-8"
-    )
-  else:
-    connection = connect_to_db_sys()
-  return connection
-
-#подключение к БЛ как SYSDBA
-def connect_to_db_sys():
-  # connection to database
   dsn_con = cx_Oracle.makedsn(
-      con_db_data['admin']['db_host'], 
-      con_db_data['admin']['db_port'], 
-      service_name = con_db_data['admin']['db_service_name']
+      con_db_data[role]['db_host'], 
+      con_db_data[role]['db_port'], 
+      service_name = con_db_data[role]['db_service_name']
   )
   connection = cx_Oracle.connect(
-      user = con_db_data['admin']['db_user'],
-      password = con_db_data['admin']['db_password'],
+      user = con_db_data[role]['db_user'],
+      password = con_db_data[role]['db_password'],
       dsn = dsn_con,
-      mode=cx_Oracle.SYSDBA,
       encoding = "UTF-8"
   )
   return connection
