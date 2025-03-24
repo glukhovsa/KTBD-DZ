@@ -95,15 +95,40 @@ def devices():
 def delete_device(id):
    return eng.delete_device(id)
 
+#добавления устройства
+@app.route('/add-device', methods=['POST'])
+def add_device():
+   return eng.add_device()
+
 #страница каждого устройства
 @app.route('/device/<id>')
 def device(id):
    return eng.device(id)
 
-#страница добавления устройства
-@app.route('/add-device', methods=['POST'])
-def add_device():
-   return eng.add_device()
+#удаление компонента
+@app.route('/component-delete/<id>')
+def delete_component(id):
+   return eng.delete_component(id)
+
+#добавление компонента
+@app.route('/component-add/<id_device>', methods=['POST'])
+def add_component(id_device):
+   return eng.add_component(id_device)
+
+#страница библиотеки компонентов
+@app.route('/component-lib')
+def component_lib():
+   return eng.component_lib()
+
+#удаление компонента из библиотеки
+@app.route('/component-lib-delete/<id>')
+def delete_component_lib(id):
+   return eng.delete_component_lib(id)
+
+#добавление компонента
+@app.route('/component-lib-add', methods=['POST'])
+def add_component_lib():
+   return eng.add_device_lib()
 
 #заруск Web приложения
 if __name__ == '__main__':

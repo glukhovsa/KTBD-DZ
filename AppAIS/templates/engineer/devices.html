@@ -9,7 +9,12 @@
     <body>
         <div class="header">
             <form action="/"><input type="submit" class="main_header" value="Главная страница"></input></form> 
-            <a href="/user" class="user_circle" value=""></a>
+            {% if role == 'engineer' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
         </div>
 
         <div class="devices">

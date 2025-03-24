@@ -1,17 +1,8 @@
-.device{
+.about{
     margin-top: 100px;
     margin-bottom: 40px;
     margin-left: 5%;
     width: 40%;
-    height: 280px;
-    background-color: #bdb0b05b;
-    border-radius: 50px;
-}
-.tech_process{
-    position:absolute;
-    top: 100px;
-    margin-left: 47%;
-    width: 20%;
     height: 280px;
     background-color: #bdb0b05b;
     border-radius: 50px;
@@ -20,7 +11,7 @@
 .add_component{
     position:absolute;
     top: 100px;
-    margin-left: 70%;
+    margin-left: 50%;
     width: 20%;
     height: 280px;
     background-color: #bdb0b05b;
@@ -52,23 +43,11 @@
     background-color: #629eb85b;
     border-radius: 20px;
 }
-.component_designator{
-    position: absolute;
-    margin-top: 15px;
-    margin-left: 1%;
-    width: 10%;
-    height: 20px;
-    font-family: 'Arial'; 
-    font-size: 20px;
-    text-align: center;
-    align-items: center;
-    border-radius: 10%;
-}
 .component_partnumber{
     position: absolute;
     margin-top: 15px;
-    margin-left: 11%;
-    width: 25%;
+    margin-left: 1%;
+    width: 20%;
     height: 20px;
     font-family: 'Arial'; 
     font-size: 20px;
@@ -76,10 +55,10 @@
     align-items: center;
     border-radius: 10%;
 }
-.component_nominal{
+.component_class{
     position: absolute;
     margin-top: 15px;
-    margin-left: 36%;
+    margin-left: 21%;
     width: 10%;
     height: 20px;
     font-family: 'Arial'; 
@@ -91,8 +70,8 @@
 .component_installation{
     position: absolute;
     margin-top: 15px;
-    margin-left: 46%;
-    width: 10%;
+    margin-left: 36%;
+    width: 9%;
     height: 20px;
     font-family: 'Arial'; 
     font-size: 20px;
@@ -103,8 +82,20 @@
 .component_manufacturer{
     position: absolute;
     margin-top: 15px;
-    margin-left: 56%;
-    width: 18%;
+    margin-left: 45%;
+    width: 15%;
+    height: 20px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.component_pad{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 60%;
+    width: 10%;
     height: 20px;
     font-family: 'Arial'; 
     font-size: 20px;

@@ -1,9 +1,8 @@
 PROMPT Заполняем таблицы модуля Engineer
 
-INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About, Device_Component_Count, Device_TechProcess_ID)
+INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About, Device_TechProcess_ID)
     VALUES(S_ENG_DEVICE.NEXTVAL, 'The device protects the room from flooding and leaks', 
-        'This device helps to protect the room from the negative effects of spilled water',
-        78, '');
+        'This device helps to protect the room from the negative effects of spilled water', '');
 
 INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Converters'),

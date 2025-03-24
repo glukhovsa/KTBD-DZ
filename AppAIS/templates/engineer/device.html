@@ -2,7 +2,7 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>Устройство</title>
+        <title>Устройство "{{device_data['name']}}"</title>
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/engineer/device.css') }}">
     </head>
@@ -23,51 +23,56 @@
             <p style="padding: 0% 10% 5%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Количество компонентов: {{device_data['count']}}</p>
         </div>
         <div class="tech_process">
-            Технологический процесс
-            {% if device_data['TP'] != None %}
-                <p>Ещё не назначен</p>
+            <p style="padding: 2px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Технологический процесс:</p>
+            {% if device_data['TP'] == None %}
+            <p style="padding: 50px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(180, 67, 32);">Ещё не назначен</p>
             {% else %}
-                <img src="{{ qrcode('/techical-process/1{{device_data[\'TP\']}}') }}">
+                <img style="width: 200px; margin-bottom: 5px;" src="{{ qrcode(qr) }}">
             {% endif %}
         </div>
-
-        <div class="components">
-            <p style="margin-top:100px; margin-left: 50px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">Список устройств:</p>
-            <div class="device_header">
-                <div class="device_name">Имя устройства</div>
-                <div class="device_about">Описание</div>
-                <div class="device_TP">Тех процесс</div>
-                <div class="device_count">Кол-во элементов</div>
+        {% if role == 'engineer' or role == 'director' %}
+            <div class="add_component">
+                <p style="padding: 5px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Добавить компонент:</p>
+                <form action="/component-add/{{device_data['id']}}" method="post">
+                    <input style="margin-top: 20px;" type="text" name="component_designator" placeholder="Позиционное обозначение"><br>
+                    <input style="margin-top: 20px;" type="text" name="component_nominal" placeholder="Номинал"><br>
+                    <select style="margin-top: 20px;" id="component_partnumber" name="component_partnumber">
+                        {% for component in components_lib %}
+                            <option value="{{component[0]}}">{{component[1]}}</option>
+                        {% endfor %}
+                    </select><br>
+                    <input style="margin-top: 15px;" type="submit" value="Добавить">
+                </form>
             </div>
-            {% if devices_data != {} %}
-                {% for device in devices_data %}
-                    <div class="device">
-                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_name"><a>{{device['name']}}</div>
-                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_about">{{device['about'][0:35]+'...'}}</div>
-                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_TP">
-                            {% if device['TP'] == '' or device['TP'] == None %}
-                                Пока не прикреплён
-                            {% else %}
-                                {{device['TP']}}
-                            {% endif %}
-                        </div>
-                        <div onclick="window.location.href='/device/{{device['id']}}'" class="device_count">{{device['count']}}</div>
+        {% endif %}
+        <div class="components">
+            <p style="margin-top:20px; margin-left: 100px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">
+                Список компонентов устройства:</p>
+            <div class="component_header">
+                <div class="component_designator">Поз. обозначение</div>
+                <div class="component_partnumber">Название</div>
+                <div class="component_nominal">Номинал</div>
+                <div class="component_installation">Монтаж</div>
+                <div class="component_manufacturer">Производитель</div>
+            </div>
+            {% if components_data != {} %}
+                {% for component in components_data %}
+                    <div class="component">
+                        <div class="component_designator">{{component['designator']}}</div>
+                        <div class="component_partnumber">{{component['partnumber']}}</div>
+                        {% if component['nominal'] == None %}
+                            <div class="component_nominal">-</div>
+                        {% else %}
+                            <div class="component_nominal">{{component['nominal']}}</div>
+                        {% endif %}
+                        <div class="component_installation">{{component['installation']}}</div>
+                        <div class="component_manufacturer">{{component['manufacturer']}}</div>
                         {% if role == 'engineer' or role == 'director' %}
-                            <div onclick="window.location.href='/device/delete/{{device['id']}}'" class="delete_device">-</div>
+                            <div class="delete_component" onclick="window.location.href='/component-delete/{{component['id']}}'">-</div>
                         {% endif %}
                     </div>
                     
                 {% endfor %}
-            {% endif %}
-            {% if role == 'engineer' or role == 'director' %}
-                <div class="device_add">
-                    <form action="/add-device" method="post">
-                        <p>Новое устройство:</p>
-                        <input type="text" name="device_name" placeholder="Имя устройства"><br>
-                        <input type="textarea" name="device_about" placeholder="Описание"><br>
-                        <input type="submit" value="Добавить">
-                    </form>
-                </div>
             {% endif %}
         </div>
         

@@ -5,7 +5,6 @@ CREATE TABLE ENG_DEVICE (
     Device_ID               NUMBER          NOT NULL,
     Device_Name             VARCHAR(255)    NOT NULL,
     Device_About            VARCHAR2(1000)  NOT NULL,
-    Device_Component_Count  NUMBER          NOT NULL,
     Device_TechProcess_ID   NUMBER          NULL
 );
 
