@@ -21,5 +21,5 @@ GRANT DROP ANY SEQUENCE TO admin_user;
 GRANT CREATE PUBLIC SYNONYM TO admin_user;
 GRANT DROP PUBLIC SYNONYM TO admin_user;
 
-ALTER USER admin_user QUOTA 100M ON users;
+ALTER USER admin_user QUOTA 500M ON users;
 quit;

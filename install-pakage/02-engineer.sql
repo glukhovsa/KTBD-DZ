@@ -40,6 +40,7 @@ INSERT INTO ENG_COMPONENT_CLASS (Class_ID, Class_Name) VALUES (S_ENG_COMPONENT_C
 INSERT INTO ENG_COMPONENT_CLASS (Class_ID, Class_Name) VALUES (S_ENG_COMPONENT_CLASS.NEXTVAL, 'Converters');
 
 
+PROMPT Создаём таблицу библиотеки компонентов
 CREATE TABLE ENG_COMPONENT_LIB (
     Lib_Component_ID        NUMBER      NOT NULL,
     Component_Class_ID      NUMBER      NOT NULL,
@@ -58,6 +59,7 @@ ALTER TABLE ENG_COMPONENT_LIB
 
 CREATE SEQUENCE S_ENG_COMPONENT_LIB INCREMENT BY 1 START WITH 1;
 
+PROMPT Создаём таблицу компонентов устройств
 CREATE TABLE ENG_COMPONENT (
     Component_ID            NUMBER      NOT NULL,
     Component_ID_in_Lib     NUMBER      NOT NULL,

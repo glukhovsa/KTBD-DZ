@@ -307,3 +307,8 @@ def add_device_lib():
     con_db.close()
 
     return redirect('/component-lib')
+
+#страница помощи для инженеров
+def engineer_help():
+    if request.cookies.get('auth_status') != 'True':
+        return redirect('/login')

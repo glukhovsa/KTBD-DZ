@@ -130,6 +130,11 @@ def delete_component_lib(id):
 def add_component_lib():
    return eng.add_device_lib()
 
+#добавление компонента
+@app.route('/engineer-help', methods=['POST'])
+def engineer_help():
+   return eng.engineer_help()
+
 #заруск Web приложения
 if __name__ == '__main__':
   app.run(debug=True)
