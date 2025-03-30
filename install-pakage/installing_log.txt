@@ -29,6 +29,7 @@ Sequence created.
 1 row created.
 1 row created.
 1 row created.
+Создаём публичные синонимы
 Synonym dropped.
 Synonym created.
 Synonym dropped.
@@ -68,6 +69,7 @@ Table altered.
 Table altered.
 Table altered.
 Sequence created.
+Создаём публичные синонимы
 Synonym dropped.
 Synonym created.
 Synonym dropped.
@@ -196,6 +198,16 @@ Synonym created.
 Table created.
 Table altered.
 Sequence created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
 1 row created.
 1 row created.
 1 row created.

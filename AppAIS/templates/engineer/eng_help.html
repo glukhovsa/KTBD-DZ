@@ -22,13 +22,13 @@
                 При разработке устройств вам следует руководствоваться следующими стандартами:</p>
             <div class="GOST_header">
                 <div class="GOST_designator">Обозначение</div>
-                <div class="GOST_name">Название</div>
+                <div class="GOST_name" style="text-align: center;">Название</div>
             </div>
             {% if gosts_data != {} %}
                 {% for gost in gosts_data %}
                     <div class="GOST">
-                        <div class="GOST_designator">{{gost['partnumber']}}</div>
-                        <div class="GOST_name">{{gost['class']}}</div>
+                        <div class="GOST_designator">{{gost['designator']}}</div>
+                        <div class="GOST_name">{{gost['name']}}</div>
                     </div>
                 {% endfor %}
             {% endif %}

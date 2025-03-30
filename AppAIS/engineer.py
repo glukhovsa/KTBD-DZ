@@ -399,16 +399,24 @@ def engineer_help():
     con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
     cursor  = con_db.cursor()
 
-    cursor.execute('SELECT GOST_ID FROM ENG_HELP_GOSTS')
-    list_gost = cursor.fetchall()
     gosts_data = []
-    for gost_id in list_gost:
-        print(gost_id)
-        gosts_data.append({'id': gost_id[0], 'designator': '', 'name': ''})
-    
-    print(list_gost)
+
+    cursor.execute('SELECT GOST_ID FROM ENG_HELP_GOSTS')
+    gosts = cursor.fetchall()
+    if len(gosts) > 0:
+        for gost in gosts:
+            gost = gost[0]
+            gost_select={
+                'designator': 'SELECT GOST_Number FROM ENG_HELP_GOSTS WHERE GOST_ID =\'' + str(gost) + '\'',
+                'name': 'SELECT GOST_Name FROM ENG_HELP_GOSTS WHERE GOST_ID =\'' + str(gost) + '\''
+            }
+            gost_data={'name': '','designator': '', 'id': str(gost)}
+            for i in gost_select:
+                cursor.execute(gost_select[i])
+                gost_data[i] = cursor.fetchall()[0][0]
+            gosts_data.append(gost_data)
 
     cursor.close()
     con_db.close()
 
-    return render_template("engineer/eng_help.html", role=func.get_role(request.cookies.get('auth_login')))
+    return render_template("engineer/eng_help.html", gosts_data=gosts_data, role=func.get_role(request.cookies.get('auth_login')))

@@ -86,6 +86,27 @@ INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name)
 INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
     VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 11284-75', 'Отверстия сквозные под крепёжные детали. Размеры');
 
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 14140-81', 'Допуски расположения осей отверстий для крепёжных деталей');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ Р МЭК 61192-1-2010', 'Печатные узлы. Требования к качеству. Часть 1. Общие технические требования');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ Р МЭК 61192-2-2010', 'Печатные узлы. Требования к качеству. Часть 2. Поверхностный монтаж');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ Р МЭК 61192-3-2010', 'Печатные узлы. Требования к качеству. Часть 3. Монтаж в сквозные отверстия');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 21931-76', 'Припои оловянно-свинцовые в изделиях');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ Р 59681-2021', ' Сборка и монтаж электронных модулей. ПРИПОИ, флюсы для пайки, припойные пасты. Марки, состав, свойства и область применения.');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 56427-2022', 'Автоматизированный смешанный и поверхностный монтаж с применением бессвинцовой и традиционной технологии');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 9805-84', 'Спирт изопропиловый. Технические условия');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 24715-81', 'Соединения паяльные. Методы контроля качества');
+INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
+    VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 23751-86', 'Платы печатные. Основные параметры конструкции');
+
 PROMPT Создаём публичный синоним
 
 DROP PUBLIC SYNONYM ENG_HELP_GOSTS;
