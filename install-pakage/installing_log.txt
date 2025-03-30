@@ -248,6 +248,38 @@ Sequence created.
 Synonym dropped.
 Synonym created.
 
+Модуль технолога
+Создаём таблицу c названием групп технологических операций
+Table created.
+Table altered.
+Sequence created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
 Создаём пользователя для пользовательского общения с БД
 User dropped.
 User created.

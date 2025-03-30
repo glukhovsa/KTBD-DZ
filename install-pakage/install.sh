@@ -19,7 +19,11 @@ sqlplus admin_user/root1@//localhost:1521/FREE @04-engineer-help.sql
 grep . log_temp.txt >> installing_log.txt
 echo '' >> installing_log.txt
 
-sqlplus SYS/root@//localhost:1521/FREE as SYSDBA @05-create-users.sql
+sqlplus admin_user/root1@//localhost:1521/FREE @05-technologist.sql
+grep . log_temp.txt >> installing_log.txt
+echo '' >> installing_log.txt
+
+sqlplus SYS/root@//localhost:1521/FREE as SYSDBA @06-create-users.sql
 grep . log_temp.txt >> installing_log.txt
 echo '' >> installing_log.txt
 
