@@ -1,8 +1,12 @@
+SPOOL log_temp.txt
 PROMPT Заполняем таблицы модуля Engineer
+PROMPT Заполняем таблицу устройств
 
 INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About, Device_TechProcess_ID)
     VALUES(S_ENG_DEVICE.NEXTVAL, 'The device protects the room from flooding and leaks', 
         'This device helps to protect the room from the negative effects of spilled water', '');
+
+PROMPT Заполняем таблицу библиотеки компонентов
 
 INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Converters'),
@@ -83,6 +87,8 @@ INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_Par
 INSERT INTO ENG_COMPONENT_LIB (Lib_Component_ID,Component_Class_ID,Component_PartNumber,Component_Instalation,Component_Manufacturer, Component_Count_Pad)
     VALUES (S_ENG_COMPONENT_LIB.NEXTVAL, (SELECT Class_ID FROM ENG_COMPONENT_CLASS WHERE Class_Name = 'Connectors'),
     'PLS 2.54 1x4pin', 'THT', 'Connfly electronic', 4);
+
+PROMPT Заполняем таблицу компонентов
 
 INSERT INTO ENG_COMPONENT (Component_ID, Component_ID_in_Lib, Component_Device_ID, Component_Designator, Component_Nominal)
     VALUES (S_ENG_COMPONENT.NEXTVAL, (SELECT Lib_Component_ID FROM ENG_COMPONENT_LIB WHERE Component_PartNumber = 'Buzzer SPT-1750A'),
@@ -407,5 +413,5 @@ INSERT INTO ENG_COMPONENT (Component_ID, Component_ID_in_Lib, Component_Device_I
         (SELECT Device_ID FROM ENG_DEVICE WHERE Device_Name = 'The device protects the room from flooding and leaks'),
         'X8', '');
 
-
+SPOOL off;
 quit;

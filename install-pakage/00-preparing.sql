@@ -1,3 +1,4 @@
+SPOOL log_temp.txt
 PROMPT Создаём пользователя для администрирования БД
 DROP USER admin_user CASCADE;
 CREATE USER admin_user IDENTIFIED BY root1;
@@ -22,4 +23,5 @@ GRANT CREATE PUBLIC SYNONYM TO admin_user;
 GRANT DROP PUBLIC SYNONYM TO admin_user;
 
 ALTER USER admin_user QUOTA 500M ON users;
+SPOOL off;
 quit;

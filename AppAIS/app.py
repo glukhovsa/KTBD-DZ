@@ -115,6 +115,11 @@ def delete_component(id):
 def add_component(id_device):
    return eng.add_component(id_device)
 
+#генерация ПЭ3
+@app.route('/generate-pe3/<id_device>')
+def generate_xls(id_device):
+   return eng.generate_xls(id_device)
+
 #страница библиотеки компонентов
 @app.route('/component-lib')
 def component_lib():
@@ -130,10 +135,11 @@ def delete_component_lib(id):
 def add_component_lib():
    return eng.add_device_lib()
 
-#добавление компонента
-@app.route('/engineer-help', methods=['POST'])
+#помошь инженеру
+@app.route('/engineer-help', methods=['POST', 'GET'])
 def engineer_help():
    return eng.engineer_help()
+
 
 #заруск Web приложения
 if __name__ == '__main__':

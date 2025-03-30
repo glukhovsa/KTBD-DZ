@@ -1,3 +1,4 @@
+SPOOL log_temp.txt
 PROMPT Модуль авторизации:
 PROMPT Создаём таблицу пользователей
 
@@ -44,10 +45,12 @@ INSERT INTO AUTH_USERS (
         '', '', 'engineer');
 
 PROMPT Создаём публичные синонимы
+
 DROP PUBLIC SYNONYM AUTH_USERS;
 CREATE PUBLIC SYNONYM AUTH_USERS FOR AUTH_USERS;
 
 DROP PUBLIC SYNONYM S_AUTH_USERS;
 CREATE PUBLIC SYNONYM S_AUTH_USERS FOR S_AUTH_USERS;
 
+SPOOL off;
 quit;

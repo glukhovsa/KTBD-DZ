@@ -16,6 +16,9 @@ import cx_Oracle
 #библиотека работы в QR
 from flask_qrcode import QRcode
 
+#библиотека для работы с xls
+import xlsxwriter
+
 ###########################################
 ##### Подключение файлов с функциями ######
 ###########################################
@@ -214,6 +217,86 @@ def add_component(id_device):
 
     return redirect('/device/'+id_device)
 
+#генерация списка компонентов
+def generate_xls(id):
+    if request.cookies.get('auth_status') != 'True':
+        return redirect('/login')
+    
+    con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
+    cursor  = con_db.cursor()
+
+    cursor.execute('SELECT Device_Name FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\'')
+    if len(cursor.fetchall()[0]) != 1:
+        return redirect('/all-devices')
+
+    device_select={
+        'name': 'SELECT Device_Name FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\'',
+        'about': 'SELECT Device_About FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\'',
+        'count': 'SELECT COUNT(Component_ID) FROM ENG_COMPONENT WHERE Component_Device_ID =\'' + id + '\'',
+        'TP': 'SELECT Device_TechProcess_ID FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\''
+    }
+    device_data={'name': '','about': '','count': '','TP': '', 'id': ''}
+    for req in device_select:
+        cursor.execute(device_select[req])
+        device_data[req] = cursor.fetchall()[0][0]
+    device_data['id'] = id
+
+    cursor.execute('SELECT Component_ID FROM ENG_Component WHERE Component_Device_ID =\'' + id + '\'')
+    components = cursor.fetchall()
+    components_data=[]
+    if device_data['count'] > 0:
+        for component in components:
+            component = component[0]
+            component_select={
+                'designator': 'SELECT Component_Designator FROM ENG_COMPONENT WHERE Component_ID =\'' + str(component) + '\'',
+                'partnumber': 'SELECT Component_PartNumber FROM ENG_COMPONENT_LIB WHERE Lib_Component_ID =\
+                    (SELECT Component_ID_in_Lib FROM ENG_COMPONENT WHERE Component_ID =\'' + str(component) + '\')',
+                'nominal': 'SELECT Component_Nominal FROM ENG_COMPONENT WHERE Component_ID =\'' + str(component) + '\'',
+                'installation': 'SELECT Component_Instalation FROM ENG_COMPONENT_LIB WHERE Lib_Component_ID =\
+                    (SELECT Component_ID_in_Lib FROM ENG_COMPONENT WHERE Component_ID =\'' + str(component) + '\')',
+                'manufacturer': 'SELECT Component_Manufacturer FROM ENG_COMPONENT_LIB WHERE Lib_Component_ID =\
+                    (SELECT Component_ID_in_Lib FROM ENG_COMPONENT WHERE Component_ID =\'' + str(component) + '\')'
+            }
+            component_data = {'id': '','designator': '', 'partnumber': '', 'nominal' : '', 'installation': '', 'manufacturer':''}
+            component_data['id'] = component
+
+            for i in component_select:
+                cursor.execute(component_select[i])
+                component_data[i] = cursor.fetchall()[0][0]
+            components_data.append(component_data)
+    
+    cursor.close()
+    con_db.close()
+    
+    pe3 =[]
+    for i in components_data:
+        flag = True
+        for j in pe3:
+            if j['partnamber'] == i['partnumber'] and j['nominal']==i['nominal']:
+                j['designators'] += (', ' + i['designator'])
+                j['count'] += 1
+                flag = False
+        if flag:
+            pe3.append({
+                'partnamber': i['partnumber'],
+                'nominal': i['nominal'],
+                'count': 1,
+                'designators': i['designator'],
+                'manufacturer': i['manufacturer']
+                })
+    workbook = xlsxwriter.Workbook('PE3.xlsx')
+    worksheet = workbook.add_worksheet()
+    
+    for i in range(len(pe3)):
+        worksheet.write('A'+str(i+1), pe3[i]['designators'])
+        if pe3[i]['nominal'] == None:
+            worksheet.write('B'+str(i+1), pe3[i]['partnamber'] + ' (' + pe3[i]['manufacturer'] + ')')
+        else:
+            worksheet.write('B'+str(i+1), pe3[i]['partnamber'] + ' ' + pe3[i]['nominal'] + ' (' + pe3[i]['manufacturer'] + ')')
+        worksheet.write('C'+str(i+1), pe3[i]['count'])
+    workbook.close()
+    return send_file('PE3.xlsx', as_attachment=True)
+
 #страница библиотеки компонентов
 def component_lib():
     if request.cookies.get('auth_status') != 'True':
@@ -312,3 +395,20 @@ def add_device_lib():
 def engineer_help():
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
+    
+    con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
+    cursor  = con_db.cursor()
+
+    cursor.execute('SELECT GOST_ID FROM ENG_HELP_GOSTS')
+    list_gost = cursor.fetchall()
+    gosts_data = []
+    for gost_id in list_gost:
+        print(gost_id)
+        gosts_data.append({'id': gost_id[0], 'designator': '', 'name': ''})
+    
+    print(list_gost)
+
+    cursor.close()
+    con_db.close()
+
+    return render_template("engineer/eng_help.html", role=func.get_role(request.cookies.get('auth_login')))

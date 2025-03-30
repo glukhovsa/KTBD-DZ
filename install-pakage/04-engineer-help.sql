@@ -1,3 +1,4 @@
+SPOOL log_temp.txt
 PROMPT Создаём таблицу с ГОСТами для инженеров
 CREATE TABLE ENG_HELP_GOSTS(
     GOST_ID     NUMBER          NOT NULL,
@@ -85,7 +86,10 @@ INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name)
 INSERT INTO ENG_HELP_GOSTS (GOST_ID, GOST_Number, GOST_Name) 
     VALUES (S_ENG_HELP_GOSTS.NEXTVAL, 'ГОСТ 11284-75', 'Отверстия сквозные под крепёжные детали. Размеры');
 
-    
+PROMPT Создаём публичный синоним
 
+DROP PUBLIC SYNONYM ENG_HELP_GOSTS;
+CREATE PUBLIC SYNONYM ENG_HELP_GOSTS FOR ENG_HELP_GOSTS;
 
+SPOOL off;
 quit;
