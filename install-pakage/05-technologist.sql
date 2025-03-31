@@ -505,19 +505,19 @@ INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Num
     73, 'Контроль накоплений погрешности шага');
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 2), 
-    74, '');
+    74, 'Контроль окружности шара');
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 2), 
-    75, '');
+    75, 'Контроль циклической погрешности');
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 2), 
-    76, '');
+    76, 'Контроль межосевого расстояния на одном зубце');
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 2), 
-    77, '');
+    77, 'Контроль профиля зубьев');
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 2), 
-    78, '');
+    78, 'Контроль колебания длины общей нормали');
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 2), 
     79, '');
