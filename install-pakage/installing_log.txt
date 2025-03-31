@@ -29,7 +29,6 @@ Sequence created.
 1 row created.
 1 row created.
 1 row created.
-Создаём публичные синонимы
 Synonym dropped.
 Synonym created.
 Synonym dropped.
@@ -69,7 +68,6 @@ Table altered.
 Table altered.
 Table altered.
 Sequence created.
-Создаём публичные синонимы
 Synonym dropped.
 Synonym created.
 Synonym dropped.
@@ -279,6 +277,152 @@ Sequence created.
 1 row created.
 1 row created.
 1 row created.
+Создаём таблицу со всеми операциями из указателя
+Table created.
+Table altered.
+Table altered.
+Sequence created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+    1, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    2, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    3, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    4, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    5, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    6, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    7, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    8, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    9, '')
+       *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
+    10, '')
+        *
+ERROR at line 3:
+ORA-01400: cannot insert NULL into 
+("ADMIN_USER"."TCHG_OPERATION_LIST"."OPERATION_NAME") 
 
 Создаём пользователя для пользовательского общения с БД
 User dropped.
