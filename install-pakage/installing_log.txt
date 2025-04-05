@@ -29,6 +29,7 @@ Sequence created.
 1 row created.
 1 row created.
 1 row created.
+Создаём публичные синонимы
 Synonym dropped.
 Synonym created.
 Synonym dropped.
@@ -44,6 +45,28 @@ Table created.
 Table altered.
 Table altered.
 Sequence created.
+Создаём таблицу с технологическими процессами
+Table created.
+Table altered.
+Sequence created.
+Создаём таблицу с технологическими операциями ТП
+Table created.
+Table altered.
+Table altered.
+Sequence created.
+Создаём публичные синонимы
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
 
 1 row created.
 1 row created.
@@ -1377,6 +1400,7 @@ Table altered.
 Table altered.
 Table altered.
 Sequence created.
+Создаём публичные синонимы
 Synonym dropped.
 Synonym created.
 Synonym dropped.
