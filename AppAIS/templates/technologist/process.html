@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>ТП {{process_data['id']}}</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/technologist/process.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            {% if role == 'engineer' %}
+                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if role == 'technologist' %}
+                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
+                <form action="/tech-processes"><input type="submit" class="eng_devices" value="Тех. процесы"></input></form>
+                <form action="/tools"><input type="submit" class="eng_lib" value="Оборудование"></input></form> 
+                <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
+        </div>
+        
+        <div class="process">
+            <p style="padding: 5% 10% 5%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">{{process_data['note']}}</p>
+        </div>
+
+        {% if role == 'technologist' or role == 'director' %}
+            <div class="add_operation">
+                <p style="padding: 5px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Добавить операцию:</p>
+                <form action="/process/{{process_data['id']}}" method="post">
+                    <div style="width: 70%; background-color: #bdb0bc5b;padding: 2px; margin-left: 15%; border-radius: 10px;">
+                        <select style="margin-top: 5px; width: 60%;" id="group" name="group">
+                            {% for group in group_lib %}
+                                {% if group[2] < 10 %}
+                                    <option value="{{group[2]}}">{{group[1]}}(0{{group[2]}}00)</option>
+                                {% else %}
+                                    <option value="{{group[2]}}">{{group[1]}}({{group[2]}}00)</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select><br>
+                        <input style="margin-top: 15px;" type="submit" value="Выбрать группу операций">
+                    </div>
+                </form>
+                <form action="/operation-add/{{process_data['id']}}" method="post">
+                    <input style="margin-top: 20px;" type="text" name="component_designator" placeholder="Позиционное обозначение"><br>
+                    <input style="margin-top: 20px;" type="text" name="component_nominal" placeholder="Номинал"><br>
+                    <select style="margin-top: 20px;" id="component_partnumber" name="component_partnumber">
+                        {% for operation in operation_lib %}
+                            {% if operation[0] < 10 %}
+                                <option value="{{operation[0]}}">({{group_t}}0{{operation[0]}}) {{operation[1]}}</option>
+                            {% else %}
+                                <option value="{{operation[0]}}">({{group_t}}{{operation[0]}}) {{operation[1]}}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select><br>
+                    <input style="margin-top: 15px;" type="submit" value="Добавить">
+                </form>
+            </div>
+        {% endif %}
+
+        <div class="operations">
+            <p style="margin-top:20px; margin-left: 100px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">
+                Технологические операции:</p>
+            <div class="operation_header ">
+                <div class="operation_number">Номер</div>
+                <div class="operation_about">Название</div>
+                <div class="operation_gost">Обозначение</div>
+                <div class="operation_tools">Оборудование</div>
+                <div class="operation_time">Время, С</div>
+            </div>
+            {% if operations_data != {} %}
+                {% for operation in operations_data %}
+                    <div class="operation">
+                        <div class="operation_number">{{operation['number']}}</div>
+                        <div class="operation_about">{{operation['about']}}</div>
+                        <div class="operation_gost">{{operation['gost_group']+operation['gost_number']+'('+operation['gost_name']+')'}}</div>
+                        <div class="operation_tools">{{operation['tools']}}</div>
+                        <div class="operation_time">{{operation['time']}}</div>
+                        {% if role == 'technologist' or role == 'director' %}
+                            <div class="delete_operation" onclick="window.location.href='/operation-delete/{{operation['id']}}'">-</div>
+                        {% endif %}
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <footer class="footer">
+            Давай по пиву
+        </footer>
+    </body>
+</html>

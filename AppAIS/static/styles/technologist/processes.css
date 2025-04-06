@@ -1,0 +1,72 @@
+.processes {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 5%;
+    width: 90%;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+}
+.process {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 70px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.process_header {
+    margin-top: 10px;
+    margin-left: 5%;
+    width: 90%;
+    height: 55px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.process_id{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 5%;
+    width: 10%;
+    height: 55px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.process_note{
+    position: absolute;
+    margin-top: 5px;
+    margin-left: 15%;
+    width: 55%;
+    height: 55px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.process_device{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 77%;
+    width: 25px;
+    height: 25px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 25%;
+    background-color: #4c8fac5b;
+}
+.process_add {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 40%;
+    width: 20%;
+    height: 120px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}

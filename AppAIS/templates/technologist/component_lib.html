@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Библиотека компонентов</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/engineer/component_lib.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <form action="/"><input type="submit" class="main_header" value="Главная страница"></input></form> 
+            {% if role == 'engineer' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
+        </div>
+        
+        <div class="about">
+            <p style="padding: 5% 10% 0%; font-family: 'Arial'; font-size: 40px; color:rgb(83, 141, 124);">
+                В данной библиотеке хранятся все компоненты, которые используюет наша компания при разработке ЭС.
+            </p>
+        </div>
+        {% if role == 'engineer' or role == 'director' %}
+            <div class="add_component">
+                <p style="padding: 5px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Добавить компонент:</p>
+                <form action="/component-lib-add" method="post">
+                    <input style="margin-top: 10px;" type="text" name="component_partnumber" placeholder="Название"><br>
+                    <input style="margin-top: 10px;" type="text" name="component_manufacturer" placeholder="Производитель"><br>
+                    <input style="margin-top: 10px;" type="text" name="component_count" placeholder="Кол-во выводов"><br>
+                    <select style="margin-top: 20px;" id="component_class" name="component_class">
+                        {% for class in classes %}
+                            <option value="{{class[0]}}">{{class[1]}}</option>
+                        {% endfor %}
+                    </select>
+                    <select style="margin-left: 2px;" id="component_installation" name="component_installation">
+                        <option value="SMD">SMD</option>
+                        <option value="THT">THT</option>
+                    </select><br>
+                    <input style="margin-top: 15px;" type="submit" value="Добавить">
+                </form>
+            </div>
+        {% endif %}
+        <div class="components">
+            <p style="margin-top:20px; margin-left: 100px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">
+                Содержимое библиотеки:</p>
+            <div class="component_header">
+                <div class="component_partnumber">Название</div>
+                <div class="component_class">Класс устройства</div>
+                <div class="component_installation">Монтаж</div>
+                <div class="component_manufacturer">Производитель</div>
+                <div class="component_pad">Кол-во выводов</div>
+            </div>
+            {% if components_data != {} %}
+                {% for component in components_data %}
+                    <div class="component">
+                        <div class="component_partnumber">{{component['partnumber']}}</div>
+                        <div class="component_class">{{component['class']}}</div>
+                        <div class="component_installation">{{component['installation']}}</div>
+                        <div class="component_manufacturer">{{component['manufacturer']}}</div>
+                        <div class="component_pad">{{component['pad_count']}}</div>
+                        {% if role == 'engineer' or role == 'director' %}
+                            <div class="delete_component" onclick="window.location.href='/component-lib-delete/{{component['id']}}'">-</div>
+                        {% endif %}
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>

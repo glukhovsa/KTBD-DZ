@@ -49,8 +49,14 @@ Sequence created.
 Table created.
 Table altered.
 Sequence created.
+Создаём таблицу оборудования
+Table created.
+Table altered.
+Sequence created.
 Создаём таблицу с технологическими операциями ТП
 Table created.
+Table altered.
+Table altered.
 Table altered.
 Table altered.
 Sequence created.
@@ -67,7 +73,12 @@ Synonym dropped.
 Synonym created.
 Synonym dropped.
 Synonym created.
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
 
+Заполняем таблицу групп операций
 1 row created.
 1 row created.
 1 row created.
@@ -94,6 +105,7 @@ Synonym created.
 1 row created.
 1 row created.
 1 row created.
+Заполняем таблицу всех операций
 1 row created.
 1 row created.
 1 row created.
@@ -1350,6 +1362,34 @@ Synonym created.
 1 row created.
 1 row created.
 1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+Заполняем таблицу оборудования
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+Заполняем таблицу ТП примером
+1 row created.
+Заполняем операции ТП примерами
 1 row created.
 1 row created.
 1 row created.
@@ -1375,19 +1415,6 @@ Sequence created.
 Table created.
 Table altered.
 Sequence created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
-1 row created.
 Создаём таблицу библиотеки компонентов
 Table created.
 Table altered.
@@ -1418,8 +1445,21 @@ Synonym created.
 Synonym dropped.
 Synonym created.
 
-Заполняем таблицы модуля Engineer
-Заполняем таблицу устройств
+Заполняем таблицу с классами компонентов
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+Заполняем таблицу устройств примером
 1 row created.
 Заполняем таблицу библиотеки компонентов
 1 row created.
@@ -1592,9 +1632,39 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Создаём пользователя тех директора
 User dropped.
 User created.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
@@ -1626,9 +1696,34 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Создаём пользователя инженера-конструктора
 User dropped.
 User created.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.

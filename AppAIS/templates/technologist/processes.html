@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Список технологических процессов</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/technologist/processes.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            {% if role == 'engineer' %}
+                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if role == 'technologist' %}
+                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
+                <form action="/tech-processes"><input type="submit" class="eng_devices" value="Тех. процесы"></input></form>
+                <form action="/tools"><input type="submit" class="eng_lib" value="Оборудование"></input></form> 
+                <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
+        </div>
+
+        <div class="processes">
+            <p style="margin-top:100px; margin-left: 50px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">Список технологических процессов:</p>
+            <div class="process_header">
+                <div class="process_id">Номер ТП</div>
+                <div class="process_note">Описание</div>
+            </div>
+            {% if processes_data != {} %}
+                {% for process in processes_data %}
+                    <div class="process">
+                        <div onclick="window.location.href='/process{{process['id']}}'" class="process_id"><a>{{process['id']}}</div>
+                        <div onclick="window.location.href='/process/{{process['id']}}'" class="process_note">{{process['note'][0:55]+'...'}}</div>
+                        {% if role == 'technologist' or role == 'director' %}
+                            <div onclick="window.location.href='/process/delete/{{process['id']}}'" class="process_device">-</div>
+                        {% endif %}
+                    </div>
+                    
+                {% endfor %}
+            {% endif %}
+            {% if role == 'technologist' or role == 'director' %}
+                <div class="process_add">
+                    <form action="/add-process" method="post">
+                        <p>Новый технологический процесс:</p>
+                        <input type="textarea" name="process_note" placeholder="О процессе"><br>
+                        <input type="submit" value="Добавить">
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>

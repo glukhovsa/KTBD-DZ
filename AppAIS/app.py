@@ -39,6 +39,9 @@ import authorization as auth
 #модуль инженера-конструктора
 import engineer as eng
 
+#модуль технолога
+import technologist as tech
+
 #подключение файла с удобными функциями
 import function as func
 
@@ -139,6 +142,43 @@ def add_component_lib():
 @app.route('/engineer-help', methods=['POST', 'GET'])
 def engineer_help():
    return eng.engineer_help()
+
+############# модуль инженера ##############
+
+#список ТП
+@app.route('/tech-processes')
+def processes():
+   return tech.processes()
+
+#удаление ТП
+@app.route('/process/delete/<id>')
+def delete_process(id):
+   return tech.delete_process(id)
+
+#добавления ТП
+@app.route('/add-process', methods=['POST'])
+def add_process():
+   return tech.add_process()
+
+#страница каждого процесса
+@app.route('/process/<id>', methods=['POST', 'GET'])
+def process(id):
+   return tech.process(id)
+
+#удаление операции
+@app.route('/operation-delete/<id>')
+def delete_operation(id):
+   return tech.delete_operation(id)
+
+#добавление операции
+@app.route('/operation-add/<id_device>', methods=['POST'])
+def add_operation(id_device):
+   return tech.add_operation(id_device)
+
+#генерация хз
+@app.route('/generate-pe3/<id_device>')
+def generate_xls_2(id_device):
+   return tech.generate_xls_2(id_device)
 
 
 #заруск Web приложения

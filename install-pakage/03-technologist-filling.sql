@@ -1,5 +1,7 @@
 SPOOL log_temp.txt
 
+PROMPT Заполняем таблицу групп операций
+
 INSERT INTO TCHG_OPERATION_GROUP (Group_ID, Group_Name, Group_Number)
     VALUES (S_TCHG_OPERATION_GROUP.NEXTVAL, 'Операции общего назначения', 1);
 INSERT INTO TCHG_OPERATION_GROUP (Group_ID, Group_Name, Group_Number)
@@ -52,6 +54,8 @@ INSERT INTO TCHG_OPERATION_GROUP (Group_ID, Group_Name, Group_Number)
     VALUES (S_TCHG_OPERATION_GROUP.NEXTVAL, 'Сварка', 90);
 INSERT INTO TCHG_OPERATION_GROUP (Group_ID, Group_Name, Group_Number)
     VALUES (S_TCHG_OPERATION_GROUP.NEXTVAL, 'Сварка', 91);
+
+PROMPT Заполняем таблицу всех операций
 
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 1), 
@@ -3890,6 +3894,97 @@ INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Num
 INSERT INTO TCHG_OPERATION_LIST (Operation_ID, Operation_Group_ID, Operation_Number, Operation_Name)
     VALUES (S_TCHG_OPERATION_LIST.NEXTVAL, (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 91), 
     87, 'Термоконтактная сварка встык');
+
+PROMPT Заполняем таблицу оборудования
+
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Стол монтажный');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Автомат для нанесения паяльной пасты');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Автоматизированные линия поверхностного монтажа');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Пятизонная печь');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Система монтажа с роботом SCARA');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Установка для пайки волной');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Установка для промывки');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Шкаф сушильный');
+INSERT INTO TCHG_TOOLS (Tool_ID, Tool_Name)
+    VALUES (S_TCHG_TOOLS.NEXTVAL, 'Установка для нанесения лака');
+
+
+PROMPT Заполняем таблицу ТП примером
+
+INSERT INTO TCHG_PROCESS (Process_ID, Process_Note)
+    VALUES (S_TCHG_PROCESS.NEXTVAL, 'ТП используется при изготовлении устройства защиты помещения от затопления и протечек. Также может использовать для других плат с комбинированным одностронним монтажём');
+
+PROMPT Заполняем операции ТП примерами
+
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 7
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 4)),
+        'Распаковка ЭРЭ', 200, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 18
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 4)),
+        'Комплектование ЭРЭ', 200, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 57
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 65)),
+        'Нанесение паяльной пасты', 300, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Автомат для нанесения паяльной пасты'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 58
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
+        'Установка КМП', 300, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Автоматизированные линия поверхностного монтажа'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 14
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 80)),
+        'Пайка в печи', 600, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Пятизонная печь'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 14
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 80)),
+        'Установка КМО на ПП', 150, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Система монтажа с роботом SCARA'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 18
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 80)),
+        'Пайка волной', 300, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Установка для пайки волной'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 25
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 1)),
+        'Промывка платы', 100, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Установка для промывки'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 70
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 1)),
+        'Сушка', 300, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Шкаф сушильный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 11
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 74)),
+        'Нанесение лака', 60, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Установка для нанесения лака'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 23
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
+        'Установка резьбовых втулок плавлением', 540, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 1
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
+        'Установка электронной ячейки в основание корпуса ', 300, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 1
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
+        'Установка батарейного отсека в основание корпуса ', 300, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 23
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
+        'Подключение батарейного отсека к разъёму электронной ячейки', 60, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 1
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
+        'Установка крышки в основании корпуса', 180, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Стол монтажный'));
+
 
 SPOOL off;
 quit;

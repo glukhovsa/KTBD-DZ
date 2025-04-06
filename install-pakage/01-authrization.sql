@@ -4,11 +4,11 @@ PROMPT Создаём таблицу пользователей
 
 CREATE TABLE AUTH_USERS (
     User_ID         NUMBER      NOT NULL,
-    User_Login      VARCHAR(25) NOT NULL,
-    User_Name       VARCHAR(30) NOT NULL,
-    User_Last_Name  VARCHAR(30) NOT NULL,
-    User_Password   VARCHAR(50) NOT NULL,
-    User_Phone     VARCHAR(15) NULL,
+    User_Login      VARCHAR(255) NOT NULL,
+    User_Name       VARCHAR(255) NOT NULL,
+    User_Last_Name  VARCHAR(255) NOT NULL,
+    User_Password   VARCHAR(255) NOT NULL,
+    User_Phone      VARCHAR(15) NULL,
     User_Email      VARCHAR(50) NULL,
     User_Role       VARCHAR(20) NOT NULL
 );
@@ -26,22 +26,22 @@ CREATE SEQUENCE S_AUTH_USERS INCREMENT BY 1 START WITH 1;
 
 INSERT INTO AUTH_USERS (
     User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Phone, User_Email, User_Role)
-    VALUES (S_AUTH_USERS.NEXTVAL, 'gluhx', 'Stepan', 'Gluhov', '085ccfa329241ca2f35b684caf376e1f', 
+    VALUES (S_AUTH_USERS.NEXTVAL, 'gluhx', 'Степан', 'Глухов', '085ccfa329241ca2f35b684caf376e1f', 
         '+79254144429', 'stepa.gl@yandex.ru', 'admin');
 
 INSERT INTO AUTH_USERS (
     User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Phone, User_Email, User_Role)
-    VALUES (S_AUTH_USERS.NEXTVAL, 'director', 'Watew', 'Tsarev', '085ccfa329241ca2f35b684caf376e1f', 
+    VALUES (S_AUTH_USERS.NEXTVAL, 'director', 'Метвей', 'Царёв', '085ccfa329241ca2f35b684caf376e1f', 
         '', '', 'director');
 
 INSERT INTO AUTH_USERS (
     User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Phone, User_Email, User_Role)
-    VALUES (S_AUTH_USERS.NEXTVAL, 'technologist', 'Vladislav', 'Rogozinskiy', '085ccfa329241ca2f35b684caf376e1f', 
+    VALUES (S_AUTH_USERS.NEXTVAL, 'technologist', 'Владислав', 'Рогозинский', '085ccfa329241ca2f35b684caf376e1f', 
         '', '', 'technologist');
 
 INSERT INTO AUTH_USERS (
     User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Phone, User_Email, User_Role)
-    VALUES (S_AUTH_USERS.NEXTVAL, 'engineer', 'Boris', 'Karyshev', '085ccfa329241ca2f35b684caf376e1f', 
+    VALUES (S_AUTH_USERS.NEXTVAL, 'engineer', 'Борис', 'Карышев', '085ccfa329241ca2f35b684caf376e1f', 
         '', '', 'engineer');
 
 PROMPT Создаём публичные синонимы

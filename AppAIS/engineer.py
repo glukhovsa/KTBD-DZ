@@ -158,9 +158,9 @@ def device(id):
             components_data.append(component_data)
     
 
-    if role == 'engineer' or role== 'director':
-        cursor.execute('SELECT Lib_Component_ID, Component_PartNumber FROM ENG_COMPONENT_LIB')
-        components_lib = cursor.fetchall()
+    
+    cursor.execute('SELECT Lib_Component_ID, Component_PartNumber FROM ENG_COMPONENT_LIB')
+    components_lib = cursor.fetchall()
 
     cursor.close()
     con_db.close()
@@ -284,18 +284,44 @@ def generate_xls(id):
                 'designators': i['designator'],
                 'manufacturer': i['manufacturer']
                 })
-    workbook = xlsxwriter.Workbook('PE3.xlsx')
+    workbook = xlsxwriter.Workbook('temp/PE3.xlsx')
     worksheet = workbook.add_worksheet()
-    
+
+    cell_format1 = workbook .add_format({'text_wrap': True,
+                              'valign': 'top',
+                              'align': 'center',
+                              'font_size': 12,
+                              'font_name': 'Times New Roman',
+                              'border' : True})
+    cell_format1.set_text_wrap()
+    cell_format2 = workbook .add_format({'text_wrap': True,
+                              'valign': 'top',
+                              'align': 'left',
+                              'font_size': 12,
+                              'font_name': 'Times New Roman',
+                              'border' : True})
+    cell_format1.set_text_wrap()
+    worksheet.set_column('A:A', 10)
+    worksheet.set_column('B:B', 40)
+    worksheet.set_column('C:C', 5)
+    worksheet.set_column('D:D', 10)
+
+
+    worksheet.write('A1', 'Поз. обозначение', cell_format1)
+    worksheet.write('B1', 'Наименование', cell_format1)
+    worksheet.write('C1', 'Кол.', cell_format1)
+    worksheet.write('D1', 'Примечание', cell_format1)
+
     for i in range(len(pe3)):
-        worksheet.write('A'+str(i+1), pe3[i]['designators'])
+        worksheet.write('A'+str(i+2), pe3[i]['designators'], cell_format1)
         if pe3[i]['nominal'] == None:
-            worksheet.write('B'+str(i+1), pe3[i]['partnamber'] + ' (' + pe3[i]['manufacturer'] + ')')
+            worksheet.write('B'+str(i+2), pe3[i]['partnamber'] + ' (' + pe3[i]['manufacturer'] + ')', cell_format2)
         else:
-            worksheet.write('B'+str(i+1), pe3[i]['partnamber'] + ' ' + pe3[i]['nominal'] + ' (' + pe3[i]['manufacturer'] + ')')
-        worksheet.write('C'+str(i+1), pe3[i]['count'])
+            worksheet.write('B'+str(i+2), pe3[i]['partnamber'] + ' ' + pe3[i]['nominal'] + ' (' + pe3[i]['manufacturer'] + ')', cell_format2)
+        worksheet.write('C'+str(i+2), pe3[i]['count'], cell_format1)
+        worksheet.write('D'+str(i+2), '', cell_format1)
     workbook.close()
-    return send_file('PE3.xlsx', as_attachment=True)
+    return send_file('temp/PE3.xlsx', as_attachment=True)
 
 #страница библиотеки компонентов
 def component_lib():
