@@ -24,7 +24,7 @@
         </div>
         <div class="tech_process">
             <p style="padding: 2px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Технологический процесс:</p>
-            {% if device_data['TP'] == None %}
+            {% if device_data['TP'] == None or device_data['TP'] == [] %}
             <p style="padding: 50px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(180, 67, 32);">Ещё не назначен</p>
             {% else %}
                 <img style="width: 200px; margin-bottom: 5px;" src="{{ qrcode(qr) }}">

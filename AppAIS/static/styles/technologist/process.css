@@ -3,16 +3,16 @@
     margin-bottom: 40px;
     margin-left: 5%;
     width: 40%;
-    height: 280px;
+    height: 350px;
     background-color: #bdb0b05b;
     border-radius: 50px;
 }
 .add_operation{
     position:absolute;
     top: 100px;
-    margin-left: 50%;
+    margin-left: 47%;
     width: 20%;
-    height: 280px;
+    height: 350px;
     background-color: #bdb0b05b;
     border-radius: 50px;
     text-align: center;
@@ -113,4 +113,14 @@
     align-items: center;
     border-radius: 25%;
     background-color: #4c8fac5b;
+}
+.add_to_device{
+    position:absolute;
+    top: 100px;
+    margin-left: 70%;
+    width: 20%;
+    height: 350px;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+    text-align: center;
 }

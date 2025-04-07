@@ -25,7 +25,7 @@ CREATE TABLE TCHG_OPERATION_LIST (
 ALTER TABLE TCHG_OPERATION_LIST
     ADD CONSTRAINT C_Operation_ID_PK PRIMARY KEY (Operation_ID);
 ALTER TABLE TCHG_OPERATION_LIST
-    ADD CONSTRAINT C_COperation_Group_ID_FK FOREIGN KEY (Operation_Group_ID) REFERENCES TCHG_OPERATION_GROUP(Group_ID);
+    ADD CONSTRAINT C_Operation_Group_ID_FK FOREIGN KEY (Operation_Group_ID) REFERENCES TCHG_OPERATION_GROUP(Group_ID);
 
 CREATE SEQUENCE S_TCHG_OPERATION_LIST INCREMENT BY 1 START WITH 1;
 
@@ -59,7 +59,7 @@ CREATE TABLE TCHG_PROCESS_OPERATION (
     Process_Operation_ID    NUMBER          NOT NULL,
     Process_ID              NUMBER          NOT NULL,
     GOST_Operation_ID       NUMBER          NOT NULL,
-    Operation_About         VARCHAR2(500)   NULL,
+    Operation_About         VARCHAR2(500)   NOT NULL,
     Operation_Time          NUMBER          NOT NULL,
     Operation_Tools_ID      NUMBER          NOT NULL
 );

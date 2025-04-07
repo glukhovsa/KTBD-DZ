@@ -1619,6 +1619,19 @@ Sequence created.
 Synonym dropped.
 Synonym created.
 
+Таблицы для связи между модулями
+Создаём таблицу связи ТП и устройств
+Table created.
+Table altered.
+Table altered.
+Table altered.
+Sequence created.
+Создаём публичные синонимы
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
+
 Создаём пользователя для пользовательского общения с БД
 User dropped.
 User created.
@@ -1637,9 +1650,16 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
 Создаём пользователя тех директора
 User dropped.
 User created.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
@@ -1716,9 +1736,18 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Создаём пользователя инженера-конструктора
 User dropped.
 User created.
+Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.

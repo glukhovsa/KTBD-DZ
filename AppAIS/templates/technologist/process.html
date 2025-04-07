@@ -45,15 +45,31 @@
                     </div>
                 </form>
                 <form action="/operation-add/{{process_data['id']}}" method="post">
-                    <input style="margin-top: 20px;" type="text" name="component_designator" placeholder="Позиционное обозначение"><br>
-                    <input style="margin-top: 20px;" type="text" name="component_nominal" placeholder="Номинал"><br>
-                    <select style="margin-top: 20px;" id="component_partnumber" name="component_partnumber">
+                    <input style="margin-top: 20px;" type="text" name="operation_about" placeholder="Об операции"><br>
+                    <input style="margin-top: 20px;" type="text" name="operation_time" placeholder="Время выполнения(в секундах)"><br>
+                    <select style="margin-top: 20px; width: 60%;" id="operation_tool" name="operation_tool">
+                        {% for tool in tools_lib %}
+                            <option value="{{tool[0]}}">{{tool[1]}}</option>
+                        {% endfor %}
+                    </select><br>
+                    <select style="margin-top: 20px; width: 60%;" id="operation_gost" name="operation_gost">
                         {% for operation in operation_lib %}
                             {% if operation[0] < 10 %}
-                                <option value="{{operation[0]}}">({{group_t}}0{{operation[0]}}) {{operation[1]}}</option>
+                                <option value="{{operation[0]}}">({{group_t}}0{{operation[1]}}) {{operation[2]}}</option>
                             {% else %}
-                                <option value="{{operation[0]}}">({{group_t}}{{operation[0]}}) {{operation[1]}}</option>
+                                <option value="{{operation[0]}}">({{group_t}}{{operation[1]}}) {{operation[2]}}</option>
                             {% endif %}
+                        {% endfor %}
+                    </select><br>
+                    <input style="margin-top: 15px;" type="submit" value="Добавить">
+                </form>
+            </div>
+            <div class="add_to_device">
+                <p style="padding: 5px 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">Добавить ТП к устройству:</p>
+                <form action="/tp-to-device/{{process_data['id']}}" method="post">
+                    <select style="margin-top: 20px; width: 60%;" id="device_id" name="device_id">
+                        {% for device in device_lib %}
+                            <option value="{{device[0]}}">{{device[1]}}</option>
                         {% endfor %}
                     </select><br>
                     <input style="margin-top: 15px;" type="submit" value="Добавить">

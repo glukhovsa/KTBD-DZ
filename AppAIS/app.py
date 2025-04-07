@@ -180,6 +180,11 @@ def add_operation(id_device):
 def generate_xls_2(id_device):
    return tech.generate_xls_2(id_device)
 
+#добавление ТП к устройству
+@app.route('/tp-to-device/<id>', methods=['POST'])
+def tp_to_dev(id):
+   return tech.tp_to_device(id)
+
 
 #заруск Web приложения
 if __name__ == '__main__':

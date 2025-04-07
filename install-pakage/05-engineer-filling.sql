@@ -18,9 +18,9 @@ INSERT INTO ENG_COMPONENT_CLASS (Class_ID, Class_Name) VALUES (S_ENG_COMPONENT_C
 
 PROMPT Заполняем таблицу устройств примером
 
-INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About, Device_TechProcess_ID)
+INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About)
     VALUES(S_ENG_DEVICE.NEXTVAL, 'Устройство защиты помещения от затопления и протечек', 
-        'Данное устройство позволяет защитить помещение от негативных последствий вылитой воды, а также оповестить об этом пользователя', '');
+        'Данное устройство позволяет защитить помещение от негативных последствий вылитой воды, а также оповестить об этом пользователя');
 
 PROMPT Заполняем таблицу библиотеки компонентов
 

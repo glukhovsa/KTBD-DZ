@@ -116,7 +116,7 @@ def process(id):
     if len(process_data['note']) == 0:
         return redirect('/tech-processes')
 
-    cursor.execute('SELECT Process_Operation_ID FROM TCHG_PROCESS_OPERATION WHERE Process_ID =\'' + id + '\'')
+    cursor.execute('SELECT Process_Operation_ID FROM TCHG_PROCESS_OPERATION WHERE Process_ID =' + id + ' ORDER BY Process_Operation_ID')
     operations = cursor.fetchall()
     operations_data=[]
     j = 5
@@ -158,15 +158,22 @@ def process(id):
     cursor.execute('SELECT Group_ID, Group_Name, Group_Number FROM TCHG_OPERATION_GROUP')
     group_lib = cursor.fetchall()
 
-    cursor.execute('SELECT Operation_Number, Operation_Name FROM TCHG_OPERATION_LIST WHERE Operation_Group_ID = \
+    cursor.execute('SELECT Operation_ID, Operation_Number, Operation_Name FROM TCHG_OPERATION_LIST WHERE Operation_Group_ID = \
                    (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = ' + str(group_t) + ')')
     operation_lib = cursor.fetchall()
     if len(group_t) == 1:
         group_t = "0"+group_t
+    
+    cursor.execute('SELECT Tool_ID, Tool_Name FROM TCHG_TOOLS')
+    tools_lib = cursor.fetchall()
+
+    cursor.execute('SELECT Device_ID, Device_Name FROM ENG_DEVICE')
+    device_lib = cursor.fetchall()
+
     cursor.close()
     con_db.close()
     return render_template("technologist/process.html", role=role, process_data=process_data, operations_data=operations_data, group_lib=group_lib,
-                           group_t=group_t, operation_lib=operation_lib)
+                           group_t=group_t, operation_lib=operation_lib, tools_lib=tools_lib, device_lib=device_lib)
 
 #удаление операции из процесса
 def delete_operation(id):
@@ -196,7 +203,7 @@ def delete_operation(id):
     return redirect('/processes')
 
 #добавление операции в процесс
-def add_component(id_device):
+def add_operation(id):
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
 
@@ -205,19 +212,33 @@ def add_component(id_device):
 
     if request.method == 'POST':
         role = func.get_role(request.cookies.get('auth_login'))
-        if role == 'engineer' or role == 'director':
-            cursor.execute('SELECT Component_ID FROM ENG_COMPONENT WHERE Component_Device_ID = \''+id_device+'\' AND Component_Designator = \'' 
-                           + request.form['component_designator'] + '\'')
-            result=cursor.fetchall()
-            if len(result) == 0:
-                cursor.execute('INSERT INTO ENG_COMPONENT (Component_ID, Component_ID_in_Lib, \
-                               Component_Device_ID, Component_Designator, Component_Nominal) \
-                               VALUES (S_ENG_COMPONENT.NEXTVAL, \''+request.form['component_partnumber']+'\', \''+ id_device +'\',\''+
-                               request.form['component_designator']+'\',\''+request.form['component_nominal']+'\')')
-                con_db.commit()
+        if role == 'technologist' or role == 'director':
+            cursor.execute('INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID) \
+            VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, '+ str(id) +', '+request.form['operation_gost']+', \''+request.form['operation_about']+'\', '+request.form['operation_time']+', '+request.form['operation_tool']+')')
+            con_db.commit()
     
     
     cursor.close()
     con_db.close()
 
-    return redirect('/device/'+id_device)
+    return redirect('/process/'+id)
+
+def tp_to_device(id_tp):
+    if request.cookies.get('auth_status') != 'True':
+        return redirect('/login')
+
+    role = func.get_role(request.cookies.get('auth_login'))
+
+    con_db = func.connect_to_db(func.get_role(role))
+    cursor  = con_db.cursor()
+
+    if request.method == 'POST':
+        if role == 'technologist' or role == 'director':
+            cursor.execute('DELETE FROM COM_TP_DEV WHERE Dev_ID = '+ request.form['device_id']+'')
+            cursor.execute('INSERT INTO COM_TP_DEV (TPDEV_Link_ID, TP_ID, Dev_ID) VALUES (S_COM_TP_DEV.NEXTVAL, '+ str(id) +', '+request.form['device_id']+')')
+    
+    
+    cursor.close()
+    con_db.close()
+
+    return redirect('/process/'+request.form['device_id'])

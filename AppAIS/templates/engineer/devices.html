@@ -31,7 +31,7 @@
                         <div onclick="window.location.href='/device/{{device['id']}}'" class="device_name"><a>{{device['name']}}</div>
                         <div onclick="window.location.href='/device/{{device['id']}}'" class="device_about">{{device['about'][0:35]+'...'}}</div>
                         <div onclick="window.location.href='/device/{{device['id']}}'" class="device_TP">
-                            {% if device['TP'] == '' or device['TP'] == None %}
+                            {% if device['TP'] == '' or device['TP'] == None or device['TP'] == [] %}
                                 Пока не прикреплён
                             {% else %}
                                 {{device['TP']}}

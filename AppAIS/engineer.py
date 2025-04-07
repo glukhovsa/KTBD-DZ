@@ -49,13 +49,15 @@ def all_devices():
                 'name': 'SELECT Device_Name FROM ENG_DEVICE WHERE Device_ID =\'' + str(device) + '\'',
                 'about': 'SELECT Device_About FROM ENG_DEVICE WHERE Device_ID =\'' + str(device) + '\'',
                 'count': 'SELECT COUNT(Component_ID) FROM ENG_COMPONENT WHERE Component_Device_ID =\'' + str(device) + '\'',
-                'TP': 'SELECT Device_TechProcess_ID FROM ENG_DEVICE WHERE Device_ID =\'' + str(device) + '\''
+                'TP': 'SELECT TP_ID FROM COM_TP_DEV WHERE Dev_ID =\'' + str(device) + '\''
             }
             device_data={'name': '','about': '','count': '','TP': '', 'id': ''}
             device_data['id'] = device
             for i in device_select:
                 cursor.execute(device_select[i])
-                device_data[i] = cursor.fetchall()[0][0]
+                device_data[i] = cursor.fetchall()
+                if len(device_data[i]) != 0:
+                    device_data[i]=device_data[i][0][0]
             devices_data.append(device_data)
     
     cursor.close()
@@ -125,12 +127,14 @@ def device(id):
         'name': 'SELECT Device_Name FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\'',
         'about': 'SELECT Device_About FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\'',
         'count': 'SELECT COUNT(Component_ID) FROM ENG_COMPONENT WHERE Component_Device_ID =\'' + id + '\'',
-        'TP': 'SELECT Device_TechProcess_ID FROM ENG_DEVICE WHERE Device_ID =\'' + id + '\''
+        'TP': 'SELECT TP_ID FROM COM_TP_DEV WHERE Dev_ID =\'' + id + '\''
     }
     device_data={'name': '','about': '','count': '','TP': '', 'id': ''}
     for req in device_select:
         cursor.execute(device_select[req])
-        device_data[req] = cursor.fetchall()[0][0]
+        device_data[req] = cursor.fetchall()
+        if len(device_data[req]) != 0:
+            device_data[req]=device_data[req][0][0]
     device_data['id'] = id
 
     cursor.execute('SELECT Component_ID FROM ENG_Component WHERE Component_Device_ID =\'' + id + '\'')
