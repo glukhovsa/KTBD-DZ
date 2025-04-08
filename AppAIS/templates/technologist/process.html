@@ -8,23 +8,31 @@
     </head>
     <body>
         <div class="header">
+            <form action="/"><input type="submit" class="main_header" value="Главная"></input></form>
             {% if role == 'engineer' %}
-                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
                 <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
                 <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
                 <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
             {% endif %}
             {% if role == 'technologist' %}
-                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
                 <form action="/tech-processes"><input type="submit" class="eng_devices" value="Тех. процесы"></input></form>
                 <form action="/tools"><input type="submit" class="eng_lib" value="Оборудование"></input></form> 
                 <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if role == 'director' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+                <form action="/add-task"><input type="submit" class="eng_help" value="Задачи"></input></form> 
+            {% endif %}
+            {% if role == 'guest' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
             {% endif %}
             <a href="/user" class="user_circle" value=""></a> 
         </div>
         
         <div class="process">
-            <p style="padding: 5% 10% 5%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">{{process_data['note']}}</p>
+            <p style="padding: 5% 10% 5%; font-family: 'Arial'; font-size: 30px; color:rgb(83, 141, 124);">{{process_data['note']}}</p>
         </div>
 
         {% if role == 'technologist' or role == 'director' %}
@@ -35,9 +43,9 @@
                         <select style="margin-top: 5px; width: 60%;" id="group" name="group">
                             {% for group in group_lib %}
                                 {% if group[2] < 10 %}
-                                    <option value="{{group[2]}}">{{group[1]}}(0{{group[2]}}00)</option>
+                                    <option value="{{group[2]}}">{{group[1]}} (0{{group[2]}}00)</option>
                                 {% else %}
-                                    <option value="{{group[2]}}">{{group[1]}}({{group[2]}}00)</option>
+                                    <option value="{{group[2]}}">{{group[1]}} ({{group[2]}}00)</option>
                                 {% endif %}
                             {% endfor %}
                         </select><br>
@@ -88,24 +96,27 @@
                 <div class="operation_time">Время, С</div>
             </div>
             {% if operations_data != {} %}
-                {% for operation in operations_data %}
+                {% for i in range(length) %}
                     <div class="operation">
-                        <div class="operation_number">{{operation['number']}}</div>
-                        <div class="operation_about">{{operation['about']}}</div>
-                        <div class="operation_gost">{{operation['gost_group']+operation['gost_number']+'('+operation['gost_name']+')'}}</div>
-                        <div class="operation_tools">{{operation['tools']}}</div>
-                        <div class="operation_time">{{operation['time']}}</div>
+                        <div class="operation_number">{{operations_data[i]['number']}}</div>
+                        <div class="operation_about">{{operations_data[i]['about']}}</div>
+                        <div class="operation_gost">{{operations_data[i]['gost_group']+operations_data[i]['gost_number']+' ('+operations_data[i]['gost_name']+')'}}</div>
+                        <div class="operation_tools">{{operations_data[i]['tools']}}</div>
+                        <div class="operation_time">{{operations_data[i]['time']}}</div>
                         {% if role == 'technologist' or role == 'director' %}
-                            <div class="delete_operation" onclick="window.location.href='/operation-delete/{{operation['id']}}'">-</div>
+                            <div class="delete_operation" onclick="window.location.href='/operation-delete/{{operations_data[i]['id']}}'">-</div>
+                            {% if not(i == 0 or i == length - 1) %}
+                                <div class="high_operation" onclick="window.location.href='/operation-high/{{operations_data[i]['id']}}'">/\</div>
+                                <div class="low_operation" onclick="window.location.href='/operation-low/{{operations_data[i]['id']}}'">\/</div>
+                            {% endif %}
                         {% endif %}
                     </div>
-                    
                 {% endfor %}
             {% endif %}
         </div>
         
         <footer class="footer">
-            Давай по пиву
+            <i onclick="window.location.href='/generate-mcard/{{process_data['id']}}'">Сгенерировать маршрутную карту</i>
         </footer>
     </body>
 </html>

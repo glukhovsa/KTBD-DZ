@@ -20,15 +20,6 @@ from flask_qrcode import QRcode
 app = Flask(__name__)
 QRcode(app)
 
-#библиотека для работы с файлами
-#from fpdf import FPDF
-#import xlsxwriter
-
-#для штрихкодов
-#import barcode
-#from barcode import EAN13
-#from barcode.writer import ImageWriter
-
 ###########################################
 ##### Подключение файлов с функциями ######
 ###########################################
@@ -42,27 +33,34 @@ import engineer as eng
 #модуль технолога
 import technologist as tech
 
+#модуль директора
+import director as dir
+
 #подключение файла с удобными функциями
 import function as func
-
 
 ###########################################
 ############# Страницы сайта ##############
 ###########################################
 @app.route('/')
 def main():
-  #проверка авторизации
-  if request.cookies.get('auth_status') != 'True':
-      return redirect('/login')
-  role = func.get_role(request.cookies.get('auth_login'))
-  return render_template("main.html", role=role)
+   #проверка авторизации
+   if request.cookies.get('auth_status') != 'True':
+         return redirect('/login')
+   
+   role = func.get_role(request.cookies.get('auth_login'))
 
-@app.route('/all')
-def all():
-  #проверка авторизации
-  if request.cookies.get('auth_status') != 'True':
-      return redirect('/login')
-  return render_template("all.html", role = func.get_role(request.cookies.get('auth_login')))
+   tasks=[]
+
+   if role == 'engineer' or role == 'technologist':
+      con_db = func.connect_to_db(role)
+      cursor  = con_db.cursor()
+
+      cursor.execute('SELECT Task_ID, Task_About FROM DIR_TASKS WHERE Task_User_ID = (SELECT User_ID FROM AUTH_USERS WHERE User_Login = \''+request.cookies.get('auth_login')+'\')')
+      tasks = cursor.fetchall() 
+
+   return render_template("main.html", role=role, tasks_data=tasks)
+
 
 ########### модуль авторизации ############
 
@@ -85,6 +83,7 @@ def logout():
 @app.route('/registration', methods=['POST', 'GET'])
 def registration():
   return auth.registration()
+
 
 ############# модуль инженера ##############
 
@@ -118,8 +117,8 @@ def delete_component(id):
 def add_component(id_device):
    return eng.add_component(id_device)
 
-#генерация ПЭ3
-@app.route('/generate-pe3/<id_device>')
+#генерация ПЭ3 excel
+@app.route('/generate-pe3-xlsx/<id_device>')
 def generate_xls(id_device):
    return eng.generate_xls(id_device)
 
@@ -143,7 +142,8 @@ def add_component_lib():
 def engineer_help():
    return eng.engineer_help()
 
-############# модуль инженера ##############
+
+############ модуль технолога #############
 
 #список ТП
 @app.route('/tech-processes')
@@ -175,16 +175,45 @@ def delete_operation(id):
 def add_operation(id_device):
    return tech.add_operation(id_device)
 
-#генерация хз
-@app.route('/generate-pe3/<id_device>')
-def generate_xls_2(id_device):
-   return tech.generate_xls_2(id_device)
-
 #добавление ТП к устройству
 @app.route('/tp-to-device/<id>', methods=['POST'])
 def tp_to_dev(id):
    return tech.tp_to_device(id)
 
+#перемещение операции вверх
+@app.route('/operation-high/<id>')
+def op_high(id):
+   return tech.operation_high(id)
+
+#перемещение операции вниз
+@app.route('/operation-low/<id>')
+def op_low(id):
+   return tech.operation_low(id)
+
+#генерация маршрутной карты
+@app.route('/generate-mcard/<TP_id>')
+def generate_mcard(TP_id):
+   return tech.mcard(TP_id)
+
+#страница списка оборудования
+@app.route('/tools')
+def tools():
+   return tech.tools()
+
+#страница помощи технологу
+@app.route('/technologist-help')
+def tech_help():
+   return tech.help()
+
+############# модуль директора ##############
+
+@app.route('/add-task', methods=['POST', 'GET'])
+def create_task():
+   return dir.create_task()
+
+@app.route('/delete-task/<id>')
+def delete_task(id):
+   return dir.delete_task(id)
 
 #заруск Web приложения
 if __name__ == '__main__':

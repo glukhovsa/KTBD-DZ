@@ -6,23 +6,57 @@
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
     </head>
     <body>
-        <div class="header">
+        <div class="header"> 
             {% if role == 'engineer' %}
-                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
                 <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
                 <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
                 <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
             {% endif %}
             {% if role == 'technologist' %}
-                <form action="/all"><input type="submit" class="main_header" value="Все страницы"></input></form> 
                 <form action="/tech-processes"><input type="submit" class="eng_devices" value="Тех. процесы"></input></form>
                 <form action="/tools"><input type="submit" class="eng_lib" value="Оборудование"></input></form> 
                 <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
             {% endif %}
+            {% if role == 'director' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+                <form action="/add-task"><input type="submit" class="eng_help" value="Задачи"></input></form> 
+            {% endif %}
+            {% if role == 'guest' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+            {% endif %}
             <a href="/user" class="user_circle" value=""></a> 
         </div>
-        
-        
+
+        <div class="square_tech">
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);" onclick="window.location.href='/tech-processes'">Список тех. процессов</p>
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);" onclick="window.location.href='/tools'">Список оборудования</p>
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);" onclick="window.location.href='/technologist-help'">Помощь технологу</p>
+        </div>
+
+        <div class="square_eng">
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);" onclick="window.location.href='/all-devices'">Список устройств</p>
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);" onclick="window.location.href='/component-lib'">Библиотека компонентов</p>
+            <p style="padding: 0% 15%; font-family: 'Arial'; font-size: 25px; color:rgb(118, 87, 14);" onclick="window.location.href='/engineer-help'">Помощь инженеру</p>
+        </div>     
+
+        {% if role == 'engineer' or role == 'technologist' %}
+            <div class="htasks">
+                <div class="htask_header">
+                    <div class="htask_number">Номер</div>
+                    <div class="htask_about">Задача</div>
+                </div>
+                {% if tasks_data!= [] %}
+                    {% for task in tasks_data %}
+                        <div class="htask">
+                            <div class="htask_number">{{task[0]}}</div>
+                            <div class="htask_about">{{task[1]}}</div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        {% endif %}
         <footer class="footer">Может по пиву?</footer>
     </body>
 </html>

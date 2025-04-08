@@ -1619,6 +1619,25 @@ Sequence created.
 Synonym dropped.
 Synonym created.
 
+Модуль директора
+Создаём таблицу с задачами для пользователей
+Table created.
+Table altered.
+Table altered.
+Sequence created.
+Создаём публичные синонимы
+Synonym dropped.
+Synonym created.
+Synonym dropped.
+Synonym created.
+
+Заполняем таблицу с задачами для примера
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+1 row created.
+
 Таблицы для связи между модулями
 Создаём таблицу связи ТП и устройств
 Table created.
@@ -1651,9 +1670,17 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
 Создаём пользователя тех директора
 User dropped.
 User created.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
+Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
@@ -1744,9 +1771,12 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
 Создаём пользователя инженера-конструктора
 User dropped.
 User created.
+Grant succeeded.
+Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.

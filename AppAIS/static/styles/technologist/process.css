@@ -114,6 +114,32 @@
     border-radius: 25%;
     background-color: #4c8fac5b;
 }
+.high_operation{
+    position: absolute;
+    margin-top: 20px;
+    margin-left: 76%;
+    width: 25px;
+    height: 25px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 25%;
+    background-color: #4c8fac5b;
+}
+.low_operation{
+    position: absolute;
+    margin-top: 55px;
+    margin-left: 76%;
+    width: 25px;
+    height: 25px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 25%;
+    background-color: #4c8fac5b;
+}
 .add_to_device{
     position:absolute;
     top: 100px;

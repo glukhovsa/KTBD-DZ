@@ -1,0 +1,48 @@
+.GOSTS {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 5%;
+    width: 90%;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+}
+.GOST_header {
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 55px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.GOST {
+    margin-left: 5%;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 50px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.GOST_designator{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 1%;
+    width: 20%;
+    height: 20px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.GOST_name{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 21%;
+    width: 55%;
+    height: 20px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    align-items: center;
+    border-radius: 10%;
+}

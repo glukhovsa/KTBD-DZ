@@ -1,0 +1,71 @@
+.about{
+    position:absolute;
+    top: 100px;
+    margin-left: 70%;
+    width: 20%;
+    height: 160px;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+    text-align: center;
+}
+.add_tool{
+    position:absolute;
+    top: 270px;
+    margin-left: 70%;
+    width: 20%;
+    height: 130px;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+    text-align: center;
+}
+.tools {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    margin-left: 5%;
+    width: 60%;
+    background-color: #bdb0b05b;
+    border-radius: 50px;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.tool_header {
+    margin-top: 10px;
+    margin-left: 5%;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 55px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.tool {
+    margin-left: 5%;
+    margin-bottom: 10px;
+    width: 90%;
+    height: 70px;
+    background-color: #629eb85b;
+    border-radius: 20px;
+}
+.tool_number{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 1%;
+    width: 5%;
+    height: 20px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}
+.tool_name{
+    position: absolute;
+    margin-top: 15px;
+    margin-left: 6%;
+    width: 50%;
+    height: 20px;
+    font-family: 'Arial'; 
+    font-size: 20px;
+    text-align: center;
+    align-items: center;
+    border-radius: 10%;
+}

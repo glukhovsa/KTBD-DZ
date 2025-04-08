@@ -3945,8 +3945,8 @@ INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Opera
         AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 80)),
         'Пайка в печи', 600, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Пятизонная печь'));
 INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
-    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 14
-        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 80)),
+    VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 58
+        AND Operation_Group_ID = (SELECT Group_ID FROM TCHG_OPERATION_GROUP WHERE Group_Number = 88)),
         'Установка КМО на ПП', 150, (SELECT Tool_ID FROM TCHG_TOOLS WHERE Tool_Name = 'Система монтажа с роботом SCARA'));
 INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID)
     VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, 1, (SELECT Operation_ID FROM TCHG_OPERATION_LIST WHERE Operation_Number = 18

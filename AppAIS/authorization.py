@@ -103,11 +103,10 @@ def registration():
       'last name': request.form['user_last_name'],
       'password': request.form['user_password'],
       'phone' : request.form['user_phone'],
-      'email' : request.form['user_email'],
-      'role' : request.form['user_role']
+      'email' : request.form['user_email']
     }
 
-    if input_data['login'] == '' or input_data['name'] == '' or input_data['last name'] == '' or input_data['password'] == '' or input_data['role'] == '':
+    if input_data['login'] == '' or input_data['name'] == '' or input_data['last name'] == '' or input_data['password'] == '' :
       error['?'] = True
       error['text'] = 'Все поля должны быть обязательно заполнены'
       return render_template("authorization/registration.html", error = error)
@@ -129,7 +128,7 @@ def registration():
     cursor.execute('INSERT INTO AUTH_USERS \
                    (User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Phone, User_Email, User_Role) \
                    VALUES (S_AUTH_USERS.NEXTVAL, \''+input_data['login']+'\', \''+input_data['name']+'\', \''+input_data['last name']+'\', \
-                    \''+input_data['password']+'\',  \''+input_data['phone']+'\',  \''+input_data['email']+'\',  \''+input_data['role']+'\')')
+                    \''+input_data['password']+'\',  \''+input_data['phone']+'\',  \''+input_data['email']+'\',  \'guest\')')
     
     cursor.execute('SELECT User_ID FROM admin_user.AUTH_USERS WHERE User_Login = \''+input_data['login']+'\'')
     if len(cursor.fetchall()) != 1:

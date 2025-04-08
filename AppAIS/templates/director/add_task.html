@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <title>Создание задачи</title>
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/director/add_task.css') }}">
+    </head>
+    <body>
+        <div class="header">
+            <form action="/"><input type="submit" class="main_header" value="Главная"></input></form>
+            {% if role == 'engineer' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if role == 'technologist' %}
+                <form action="/tech-processes"><input type="submit" class="eng_devices" value="Тех. процесы"></input></form>
+                <form action="/tools"><input type="submit" class="eng_lib" value="Оборудование"></input></form> 
+                <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if role == 'director' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+                <form action="/add-task"><input type="submit" class="eng_help" value="Задачи"></input></form> 
+            {% endif %}
+            {% if role == 'guest' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
+        </div>
+        {% if role == 'director' %}
+        <div class="add_task">
+            <p style="padding: 5% 10% 0%; font-family: 'Arial'; font-size: 20px; color:rgb(83, 141, 124);">
+                Новая задача:
+            </p>
+                <form action="/add-task" method="post">
+                    <input style="margin-top: 10px;" type="text" name="task" placeholder="Задача"><br>
+                    <select style="margin-top: 20px;" id="user" name="user">
+                        {% for user in users_data %}
+                            <option value="{{user[0]}}">{{user[1]}}</option>
+                        {% endfor %}
+                    </select>
+                    <input style="margin-top: 15px;" type="submit" value="Добавить">
+                </form>
+            </p>
+        </div>
+        {% endif %}
+
+        <div class="tasks">
+            <div class="task_header">
+                <div class="task_number">Номер</div>
+                <div class="task_user">Исполнитель</div>
+                <div class="task_about">Задача</div>
+            </div>
+            {% if tasks_data!= {} %}
+                {% for task in tasks_data %}
+                    <div class="task">
+                        <div class="task_number">{{task['id']}}</div>
+                        <div class="task_user">{{task['user']}}</div>
+                        <div class="task_about">{{task['about']}}</div>
+                        {% if role == 'director' %}
+                            <div class="delete_task" onclick="window.location.href='/delete-task/{{task['id']}}'">✓</div>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        
+        <footer class="footer">Может по пиву?</footer>
+    </body>
+</html>
