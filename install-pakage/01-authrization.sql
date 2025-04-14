@@ -31,7 +31,7 @@ INSERT INTO AUTH_USERS (
 
 INSERT INTO AUTH_USERS (
     User_ID, User_Login, User_Name, User_Last_Name, User_Password, User_Phone, User_Email, User_Role)
-    VALUES (S_AUTH_USERS.NEXTVAL, 'director', 'Метвей', 'Царёв', '085ccfa329241ca2f35b684caf376e1f', 
+    VALUES (S_AUTH_USERS.NEXTVAL, 'director', 'Степан', 'Глухов', '085ccfa329241ca2f35b684caf376e1f', 
         '', '', 'director');
 
 INSERT INTO AUTH_USERS (

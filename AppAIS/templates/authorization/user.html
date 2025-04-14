@@ -8,8 +8,27 @@
     </head>
     <body>
         <div class="header">
-            <form action="/"><input type="submit" class="main_header" value="Главная страница"></input></form> 
-            <a href="/user" class="user_circle" value=""></a>
+            <form action="/"><input type="submit" class="main_header" value="Главная"></input></form>
+            {% if user_data['role'] == 'engineer' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/component-lib"><input type="submit" class="eng_lib" value="Компоненты"></input></form> 
+                <form action="/engineer-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if user_data['role'] == 'technologist' %}
+                <form action="/tech-processes"><input type="submit" class="eng_devices" value="Тех. процесы"></input></form>
+                <form action="/tools"><input type="submit" class="eng_lib" value="Оборудование"></input></form> 
+                <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
+            {% endif %}
+            {% if user_data['role'] == 'director' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+                <form action="/add-task"><input type="submit" class="eng_help" value="Задачи"></input></form> 
+            {% endif %}
+            {% if user_data['role'] == 'guest' %}
+                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
+                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
+            {% endif %}
+            <a href="/user" class="user_circle" value=""></a> 
         </div>
 
         <div class="square_user_data_personal">
@@ -43,6 +62,7 @@
         
         <form action="/logout"><input type="submit" class="logout" value="Выйти из аккаунта"></input></form> 
         
-        <footer class="footer">Может по пиву?</footer>
+        <footer class="footer">Хорошего дня!</footer>
+
     </body>
 </html>
