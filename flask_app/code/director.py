@@ -29,7 +29,7 @@ def create_task():
     #проверка авторизации
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
 
     if role != 'director':
@@ -76,7 +76,7 @@ def delete_task(id):
     #проверка авторизации
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
 
     if role != 'director':
@@ -91,19 +91,19 @@ def delete_task(id):
     cursor.close()
     con_db.close()
 
-    return redirect('/add-task')
+    return redirect('/add-tasks')
 
 #список сотрудников
 def staff():
     #проверка авторизации
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
 
     if role == 'guest':
         return redirect('/')
-    
+
     con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
     cursor  = con_db.cursor()
 
@@ -114,4 +114,3 @@ def staff():
     con_db.close()
 
     return render_template("director/staff.html", staff_data=staff_data, role=role)
-    

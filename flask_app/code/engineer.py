@@ -278,7 +278,8 @@ def generate_xls(id):
                 'manufacturer': i['manufacturer']
                 })
 
-    workbook = xlsxwriter.Workbook(f'{tempfile.tempdir}/PE3.xlsx')
+    _, path = tempfile.mkstemp(suffix='.xlsx')
+    workbook = xlsxwriter.Workbook(path)
     worksheet = workbook.add_worksheet()
 
     cell_format1 = workbook .add_format({'text_wrap': True,
@@ -315,7 +316,7 @@ def generate_xls(id):
         worksheet.write('C'+str(i+2), pe3[i]['count'], cell_format1)
         worksheet.write('D'+str(i+2), '', cell_format1)
     workbook.close()
-    return send_file(f'{tempfile.tempdir}/PE3.xlsx', as_attachment=True)
+    return send_file(path, as_attachment=True)
 
 #страница библиотеки компонентов
 def component_lib():

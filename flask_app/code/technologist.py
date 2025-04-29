@@ -9,6 +9,7 @@ from flask import request
 from flask import redirect
 from flask import make_response
 from flask import send_file
+import tempfile
 
 #библиотека для работы с Oracle
 import oracledb
@@ -50,7 +51,7 @@ def processes():
             cursor.execute('SELECT Process_Note FROM TCHG_PROCESS WHERE Process_ID = '+ str(process))
             process_data['note'] = cursor.fetchall()[0][0]
             processes_data.append(process_data)
-    
+
     cursor.close()
     con_db.close()
 
@@ -88,7 +89,7 @@ def add_process():
         if role == 'technologist' or role == 'director':
             cursor.execute('INSERT INTO TCHG_PROCESS (Process_ID, Process_Note) \
                         VALUES (S_TCHG_PROCESS.NEXTVAL, \''+request.form['process_note']+'\')')
-            con_db.commit()  
+            con_db.commit()
     cursor.close()
     con_db.close()
 
@@ -99,9 +100,9 @@ def process(id):
     #проверка авторизации
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
-    
+
     if request.method=='POST':
         group_t = request.form['group']
     else:
@@ -123,15 +124,15 @@ def process(id):
     for operation in operations:
         operation = operation[0]
         operation_select={
-            'about': 'SELECT Operation_About FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation), 
+            'about': 'SELECT Operation_About FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation),
             'gost_number' : 'SELECT Operation_Number FROM TCHG_OPERATION_LIST WHERE Operation_ID = \
                 (SELECT GOST_Operation_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation)+')',
             'gost_name' : 'SELECT Operation_Name FROM TCHG_OPERATION_LIST WHERE Operation_ID = \
                 (SELECT GOST_Operation_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation)+')',
             'gost_group' : 'SELECT Group_Number FROM TCHG_OPERATION_GROUP WHERE Group_ID = \
                 (SELECT Operation_Group_ID FROM TCHG_OPERATION_LIST WHERE Operation_ID = \
-                (SELECT GOST_Operation_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation)+'))', 
-            'time': 'SELECT Operation_Time FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation), 
+                (SELECT GOST_Operation_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation)+'))',
+            'time': 'SELECT Operation_Time FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation),
             'tools': 'SELECT Tool_Name FROM TCHG_TOOLS WHERE Tool_ID = (SELECT Operation_Tools_ID FROM \
                 TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+str(operation)+')'
             }
@@ -143,7 +144,7 @@ def process(id):
         operation_data['number']=j
         j+=5
         operations_data.append(operation_data)
-    
+
     for i in operations_data:
         if i['gost_number']<10:
             i['gost_number'] = '0' + str(i['gost_number'])
@@ -154,7 +155,7 @@ def process(id):
         else:
             i['gost_group'] = str(i['gost_group'])
 
-    
+
     cursor.execute('SELECT Group_ID, Group_Name, Group_Number FROM TCHG_OPERATION_GROUP')
     group_lib = cursor.fetchall()
 
@@ -163,7 +164,7 @@ def process(id):
     operation_lib = cursor.fetchall()
     if len(group_t) == 1:
         group_t = "0"+group_t
-    
+
     cursor.execute('SELECT Tool_ID, Tool_Name FROM TCHG_TOOLS')
     tools_lib = cursor.fetchall()
 
@@ -196,7 +197,7 @@ def delete_operation(id):
 
         cursor.close()
         con_db.close()
-    
+
         return redirect('/process/'+str(redir))
     cursor.close()
     con_db.close()
@@ -216,8 +217,8 @@ def add_operation(id):
             cursor.execute('INSERT INTO TCHG_PROCESS_OPERATION (Process_Operation_ID, Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID) \
             VALUES (S_TCHG_PROCESS_OPERATION.NEXTVAL, '+ str(id) +', '+request.form['operation_gost']+', \''+request.form['operation_about']+'\', '+request.form['operation_time']+', '+request.form['operation_tool']+')')
             con_db.commit()
-    
-    
+
+
     cursor.close()
     con_db.close()
 
@@ -238,8 +239,8 @@ def tp_to_device(id_tp):
             cursor.execute('DELETE FROM COM_TP_DEV WHERE Dev_ID = '+ request.form['device_id']+'')
             cursor.execute('INSERT INTO COM_TP_DEV (TPDEV_Link_ID, TP_ID, Dev_ID) VALUES (S_COM_TP_DEV.NEXTVAL, '+ str(id_tp) +', '+request.form['device_id']+')')
             con_db.commit()
-    
-    
+
+
     cursor.close()
     con_db.close()
 
@@ -264,7 +265,7 @@ def operation_high(id):
         operation_1 = cursor.fetchall()[0]
         cursor.execute('SELECT Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+ str(id_2))
         operation_2 = cursor.fetchall()[0]
-        
+
         cursor.execute('DELETE FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+ str(id))
         cursor.execute('DELETE FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+ str(id_2))
 
@@ -298,7 +299,7 @@ def operation_low(id):
         operation_1 = cursor.fetchall()[0]
         cursor.execute('SELECT Process_ID, GOST_Operation_ID, Operation_About, Operation_Time, Operation_Tools_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+ str(id_2))
         operation_2 = cursor.fetchall()[0]
-        
+
         cursor.execute('DELETE FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+ str(id))
         cursor.execute('DELETE FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = '+ str(id_2))
 
@@ -317,7 +318,7 @@ def operation_low(id):
 def mcard(id):
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
     cursor  = con_db.cursor()
 
@@ -326,10 +327,10 @@ def mcard(id):
     if len(operations) == 0:
         return redirect('/process/'+ str(id))
     pdf = FPDF()
-    pdf.add_font('DejaVu', '', '/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf')
+    pdf.add_font('DejaVu', fname='/usr/share/fonts/truetype/dejavu/DejaVuSerif.ttf', uni=True)
     pdf.set_font(family='DejaVu',size=12)
     pdf.add_page()
-    
+
     col_width1 = int(pdf.w / 2.7)
     col_width2 = int(pdf.w / 10)
     row_height = pdf.font_size*2
@@ -367,7 +368,7 @@ def mcard(id):
 
         i+=5
         operations_data.append(operation_data)
-    
+
 
     cursor.close()
     con_db.close()
@@ -404,15 +405,16 @@ def mcard(id):
                     pdf.multi_cell(col_width1, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border="LTR")
                     x = pdf.get_x()
                     pdf.set_xy(int(x), int(y))
-    pdf.output('temp/mcard.pdf')
+    _, path = tempfile.mkstemp(suffix='.pdf')
+    pdf.output(path)
 
-    return send_file('temp/mcard.pdf', as_attachment=True)
+    return send_file(path, as_attachment=True)
 
 #страница оборудования
 def tools():
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
 
     con_db = func.connect_to_db(role)
@@ -420,18 +422,18 @@ def tools():
 
     cursor.execute('SELECT Tool_ID, Tool_Name FROM TCHG_TOOLS')
     tools = cursor.fetchall()
-    
-    
+
+
     cursor.close()
     con_db.close()
-    
+
     return render_template("technologist/tools.html", role=role, tools=tools)
 
 #страница помощи технологу
 def help():
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
 
     con_db = func.connect_to_db(role)
