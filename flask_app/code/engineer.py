@@ -9,6 +9,7 @@ from flask import request
 from flask import redirect
 from flask import make_response
 from flask import send_file
+import tempfile
 
 #библиотека для работы с Oracle
 import oracledb
@@ -59,7 +60,7 @@ def all_devices():
                 if len(device_data[i]) != 0:
                     device_data[i]=device_data[i][0][0]
             devices_data.append(device_data)
-    
+
     cursor.close()
     con_db.close()
 
@@ -101,8 +102,8 @@ def add_device():
                 cursor.execute('INSERT INTO ENG_DEVICE (Device_ID, Device_Name, Device_About) \
                             VALUES (S_ENG_DEVICE.NEXTVAL, \''+request.form['device_name']+'\', \''+ request.form['device_about']+'\')')
                 con_db.commit()
-    
-    
+
+
     cursor.close()
     con_db.close()
 
@@ -113,9 +114,9 @@ def device(id):
     #проверка авторизации
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
-    
+
     con_db = func.connect_to_db(role)
     cursor = con_db.cursor()
 
@@ -160,15 +161,15 @@ def device(id):
                 cursor.execute(component_select[i])
                 component_data[i] = cursor.fetchall()[0][0]
             components_data.append(component_data)
-    
 
-    
+
+
     cursor.execute('SELECT Lib_Component_ID, Component_PartNumber FROM ENG_COMPONENT_LIB')
     components_lib = cursor.fetchall()
 
     cursor.close()
     con_db.close()
-    return render_template("engineer/device.html", role=role, device_data=device_data, components_data=components_data, 
+    return render_template("engineer/device.html", role=role, device_data=device_data, components_data=components_data,
                            qr='http://localhost:5000/techical-process/'+str(device_data['TP']), components_lib=components_lib)
 
 #удаление компонента из устройства
@@ -191,7 +192,7 @@ def delete_component(id):
             con_db.commit()
             cursor.close()
             con_db.close()
-    
+
     return redirect('/device/'+str(redir))
 
 #добавление компонента в устройство
@@ -205,7 +206,7 @@ def add_component(id_device):
     if request.method == 'POST':
         role = func.get_role(request.cookies.get('auth_login'))
         if role == 'engineer' or role == 'director':
-            cursor.execute('SELECT Component_ID FROM ENG_COMPONENT WHERE Component_Device_ID = \''+id_device+'\' AND Component_Designator = \'' 
+            cursor.execute('SELECT Component_ID FROM ENG_COMPONENT WHERE Component_Device_ID = \''+id_device+'\' AND Component_Designator = \''
                            + request.form['component_designator'] + '\'')
             result=cursor.fetchall()
             if len(result) == 0:
@@ -214,8 +215,8 @@ def add_component(id_device):
                                VALUES (S_ENG_COMPONENT.NEXTVAL, \''+request.form['component_partnumber']+'\', \''+ id_device +'\',\''+
                                request.form['component_designator']+'\',\''+request.form['component_nominal']+'\')')
                 con_db.commit()
-    
-    
+
+
     cursor.close()
     con_db.close()
 
@@ -225,7 +226,7 @@ def add_component(id_device):
 def generate_xls(id):
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
     cursor  = con_db.cursor()
 
@@ -256,10 +257,10 @@ def generate_xls(id):
             cursor.execute(component_select[i])
             component_data[i] = cursor.fetchall()[0][0]
         components_data.append(component_data)
-    
+
     cursor.close()
     con_db.close()
-    
+
     pe3 =[]
     for i in components_data:
         flag = True
@@ -276,7 +277,8 @@ def generate_xls(id):
                 'designators': i['designator'],
                 'manufacturer': i['manufacturer']
                 })
-    workbook = xlsxwriter.Workbook('temp/PE3.xlsx')
+
+    workbook = xlsxwriter.Workbook(f'{tempfile.tempdir}/PE3.xlsx')
     worksheet = workbook.add_worksheet()
 
     cell_format1 = workbook .add_format({'text_wrap': True,
@@ -313,13 +315,13 @@ def generate_xls(id):
         worksheet.write('C'+str(i+2), pe3[i]['count'], cell_format1)
         worksheet.write('D'+str(i+2), '', cell_format1)
     workbook.close()
-    return send_file('temp/PE3.xlsx', as_attachment=True)
+    return send_file(f'{tempfile.tempdir}/PE3.xlsx', as_attachment=True)
 
 #страница библиотеки компонентов
 def component_lib():
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     role = func.get_role(request.cookies.get('auth_login'))
 
     con_db = func.connect_to_db(role)
@@ -351,10 +353,10 @@ def component_lib():
     if role == 'engineer' or role== 'director':
         cursor.execute('SELECT Class_ID, Class_Name FROM ENG_COMPONENT_CLASS')
         classes = cursor.fetchall()
-    
+
     cursor.close()
     con_db.close()
-    
+
     return render_template("engineer/component_lib.html", role=role, components_data=components_data, classes=classes)
 
 #удаление компонента из библиотеки
@@ -372,7 +374,7 @@ def delete_component_lib(id):
         con_db.commit()
         cursor.close()
         con_db.close()
-    
+
     return redirect('/component-lib')
 
 #добавление компонента в библиотеку
@@ -386,7 +388,7 @@ def add_device_lib():
     if request.method == 'POST':
         role = func.get_role(request.cookies.get('auth_login'))
         if role == 'engineer' or role == 'director':
-            cursor.execute('SELECT Lib_Component_ID FROM ENG_COMPONENT_LIB WHERE Component_PartNumber = \'' 
+            cursor.execute('SELECT Lib_Component_ID FROM ENG_COMPONENT_LIB WHERE Component_PartNumber = \''
                            + request.form['component_partnumber'] + '\'')
             result=cursor.fetchall()
             if len(result) == 0:
@@ -404,8 +406,8 @@ def add_device_lib():
                                 \''+request.form['component_manufacturer'] + '\', \
                                 '+request.form['component_count'] + ')')
                 con_db.commit()
-    
-    
+
+
     cursor.close()
     con_db.close()
 
@@ -415,7 +417,7 @@ def add_device_lib():
 def engineer_help():
     if request.cookies.get('auth_status') != 'True':
         return redirect('/login')
-    
+
     con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
     cursor  = con_db.cursor()
 
