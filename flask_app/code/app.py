@@ -207,7 +207,7 @@ def tech_help():
 
 ############# модуль директора ##############
 
-@app.route('/add-task', methods=['POST', 'GET'])
+@app.route('/add-tasks', methods=['POST', 'GET'])
 def create_task():
    return dir.create_task()
 

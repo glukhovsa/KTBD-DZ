@@ -91,7 +91,7 @@ def delete_task(id):
     cursor.close()
     con_db.close()
 
-    return redirect('/add-task')
+    return redirect('/add-tasks')
 
 #список сотрудников
 def staff():
