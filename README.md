@@ -8,5 +8,4 @@ git clone https://github.com/glukhovsa/KTBD-DZ
 cd KTBD-DZ
 
 docker compose up
-
 ```
