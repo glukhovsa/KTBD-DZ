@@ -12,7 +12,7 @@
             <br>
             <form method="post" action="/login">
                 <p>Введите логин:</p>   <input type="text" name="user_login" placeholder="Логин"><br>
-                <p>Введите пароль:</p>  <input type="text" name="user_password" placeholder="Пароль"><br>
+                <p>Введите пароль:</p>  <input type="password" name="user_password" placeholder="Пароль"><br>
                 <input type="submit" value="Войти">
             </form>
             {% if login_data['error_data'] %}
