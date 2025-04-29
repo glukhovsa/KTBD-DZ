@@ -4,10 +4,5 @@
 ## Как запустить
 
 ```
-git clone https://github.com/glukhovsa/KTBD-DZ
-cd KTBD-DZ
-
-mkdir data && chmod a+rwx data
-
-docker compose up --build --force-recreate
+curl https://raw.githubusercontent.com/glukhovsa/KTBD-DZ/refs/heads/main/run.sh | bash -
 ```
