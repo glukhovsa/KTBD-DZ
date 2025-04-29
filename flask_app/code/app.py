@@ -2,8 +2,8 @@
 ######### Подключение библиотек ###########
 ###########################################
 
-#Библиотека cx_Oracle для подключения к БД
-import cx_Oracle
+#Библиотека oracledb для подключения к БД
+import oracledb
 from pprint import pprint as pp
 
 

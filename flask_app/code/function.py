@@ -11,7 +11,7 @@ from flask import make_response
 from flask import send_file
 
 #библиотека для работы с Oracle
-import cx_Oracle
+import oracledb
 
 ###########################################
 ############# Удобные функции #############
@@ -55,16 +55,15 @@ con_db_data = {
 #подключение к БД
 def connect_to_db(role):
   # connection to database
-  dsn_con = cx_Oracle.makedsn(
+  dsn_con = oracledb.makedsn(
       con_db_data[role]['db_host'],
       con_db_data[role]['db_port'],
       service_name = con_db_data[role]['db_service_name']
   )
-  connection = cx_Oracle.connect(
+  connection = oracledb.connect(
       user = con_db_data[role]['db_user'],
       password = con_db_data[role]['db_password'],
       dsn = dsn_con,
-      encoding = "UTF-8"
   )
   return connection
 

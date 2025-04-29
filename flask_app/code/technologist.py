@@ -11,7 +11,7 @@ from flask import make_response
 from flask import send_file
 
 #библиотека для работы с Oracle
-import cx_Oracle
+import oracledb
 
 #библиотека работы в QR
 from flask_qrcode import QRcode
