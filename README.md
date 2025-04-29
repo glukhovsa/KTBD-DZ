@@ -7,5 +7,7 @@
 git clone https://github.com/glukhovsa/KTBD-DZ
 cd KTBD-DZ
 
-docker compose up
+mkdir data && chmod a+rwx data
+
+docker compose up --build --force-recreate
 ```
