@@ -8,4 +8,4 @@ cd KTBD-DZ
 mkdir data && chmod a+rwx data
 
 docker rm ais_sql_server.g ais.g
-docker compose up --build --force-recreate -d
+docker compose up --build --force-recreate
