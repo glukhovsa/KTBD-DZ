@@ -1,6 +1,7 @@
 set -eou pipefail
 set -x
 
+rm -rf KTBD-DZ
 git clone https://github.com/glukhovsa/KTBD-DZ
 cd KTBD-DZ
 
