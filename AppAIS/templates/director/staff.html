@@ -2,9 +2,9 @@
 <html lang="ru">
     <head>
         <meta charset="UTF-8">
-        <title>Помошь инженеру</title>
+        <title>список сотрудников</title>
         <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/common.css') }}">
-        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/engineer/eng_help.css') }}">
+        <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='styles/director/staff.css') }}">
     </head>
     <body>
         <div class="header">
@@ -30,19 +30,23 @@
             <a href="/user" class="user_circle" value=""></a> 
         </div>
 
-        <div class="GOSTS">
-            <p style="margin-top:20px; margin-left: 100px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">
-                При разработке устройств вам следует руководствоваться следующими стандартами:</p>
-            <div class="GOST_header">
-                <div class="GOST_designator">Обозначение</div>
-                <div class="GOST_name" style="text-align: center;">Название</div>
+        <div class="devices">
+            <p style="margin-top:100px; margin-left: 50px; font-family: 'Arial'; font-size: 30px; color:rgb(185, 65, 60);">Список сотрудников:</p>
+            <div class="device_header">
+                <div class="device_name">Сотрудник</div>
+                <div class="device_about">Почта</div>
+                <div class="device_TP">Телефон</div>
+                <div class="device_count">Должность</div>
             </div>
-            {% if gosts_data != {} %}
-                {% for gost in gosts_data %}
-                    <div class="GOST">
-                        <div class="GOST_designator">{{gost['designator']}}</div>
-                        <div class="GOST_name">{{gost['name']}}</div>
+            {% if staff_data != {} %}
+                {% for device in staff_data %}
+                    <div class="device">
+                        <div class="device_name">{{device[0]}} {{device[1]}}</div>
+                        <div class="device_about">{{device[3]}}</div>
+                        <div class="device_TP">{{device[2]}}</div>
+                        <div class="device_count">{{device[4]}}</div>
                     </div>
+                    
                 {% endfor %}
             {% endif %}
         </div>

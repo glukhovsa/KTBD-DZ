@@ -56,7 +56,7 @@ def main():
       con_db = func.connect_to_db(role)
       cursor  = con_db.cursor()
 
-      cursor.execute('SELECT Task_ID, Task_About FROM DIR_TASKS WHERE Task_User_ID = (SELECT User_ID FROM AUTH_USERS WHERE User_Login = \''+request.cookies.get('auth_login')+'\')')
+      cursor.execute('SELECT Task_ID, Task_About, Task_Check FROM DIR_TASKS WHERE Task_User_ID = (SELECT User_ID FROM AUTH_USERS WHERE User_Login = \''+request.cookies.get('auth_login')+'\')')
       tasks = cursor.fetchall() 
 
    return render_template("main.html", role=role, tasks_data=tasks)
@@ -214,6 +214,10 @@ def create_task():
 @app.route('/delete-task/<id>')
 def delete_task(id):
    return dir.delete_task(id)
+
+@app.route('/staff')
+def staff():
+   return dir.staff()
 
 #заруск Web приложения
 if __name__ == '__main__':

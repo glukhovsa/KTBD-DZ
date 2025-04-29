@@ -6,7 +6,8 @@ PROMPT Создаём таблицу с задачами для пользова
 CREATE TABLE DIR_TASKS(
     Task_ID         NUMBER          NOT NULL,
     Task_User_ID    NUMBER          NOT NULL,
-    Task_About      VARCHAR2(1000)  NOT NULL
+    Task_About      VARCHAR2(1000)  NOT NULL,
+    Task_Check      NUMBER          NOT NULL
 );
 
 ALTER TABLE DIR_TASKS

@@ -59,6 +59,8 @@ def user():
   if request.cookies.get('auth_status') != 'True':
       return redirect('/login')
   
+  role = func.get_role(request.cookies.get('auth_login'))
+
   user_data = {
     'login': request.cookies.get('auth_login'),
     'name': '',
@@ -84,7 +86,7 @@ def user():
   cursor.close()
   con_db.close()
 
-  return render_template("authorization/user.html", user_data=user_data)
+  return render_template("authorization/user.html", user_data=user_data, role=role)
 
 #выход из аккаунта
 def logout():

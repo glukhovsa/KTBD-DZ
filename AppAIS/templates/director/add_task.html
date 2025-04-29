@@ -20,9 +20,8 @@
                 <form action="/technologist-help"><input type="submit" class="eng_help" value="Помощь"></input></form> 
             {% endif %}
             {% if role == 'director' %}
-                <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
-                <form action="/tech-processes"><input type="submit" class="eng_lib" value="Тех. процесы"></input></form> 
-                <form action="/add-task"><input type="submit" class="eng_help" value="Задачи"></input></form> 
+                <form action="/add-tasks"><input type="submit" class="eng_lib" value="Задачи"></input></form>
+                <form action="/staff"><input type="submit" class="eng_devices" value="Сотрудники"></input></form>
             {% endif %}
             {% if role == 'guest' %}
                 <form action="/all-devices"><input type="submit" class="eng_devices" value="Список устройств"></input></form>
@@ -39,7 +38,7 @@
                     <input style="margin-top: 10px;" type="text" name="task" placeholder="Задача"><br>
                     <select style="margin-top: 20px;" id="user" name="user">
                         {% for user in users_data %}
-                            <option value="{{user[0]}}">{{user[1]}}</option>
+                            <option value="{{user[0]}}">{{user[1]}} {{user[2]}}</option>
                         {% endfor %}
                     </select>
                     <input style="margin-top: 15px;" type="submit" value="Добавить">
@@ -52,18 +51,38 @@
             <div class="task_header">
                 <div class="task_number">Номер</div>
                 <div class="task_user">Исполнитель</div>
-                <div class="task_about">Задача</div>
+                <div class="task_about">Текущие задачи</div>
             </div>
             {% if tasks_data!= {} %}
                 {% for task in tasks_data %}
+                    {% if task['status']  == 0 %}
                     <div class="task">
                         <div class="task_number">{{task['id']}}</div>
-                        <div class="task_user">{{task['user']}}</div>
+                        <div class="task_user">{{task['user_name']}} {{task['user_last']}}</div>
                         <div class="task_about">{{task['about']}}</div>
-                        {% if role == 'director' %}
+                        {% if role == 'director'%}
                             <div class="delete_task" onclick="window.location.href='/delete-task/{{task['id']}}'">✓</div>
                         {% endif %}
                     </div>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="tasks">
+            <div class="task_header">
+                <div class="task_number">Номер</div>
+                <div class="task_user">Исполнитель</div>
+                <div class="task_about">Выполненные задачи</div>
+            </div>
+            {% if tasks_data!= {} %}
+                {% for task in tasks_data %}
+                    {% if task['status']  == 1 %}
+                    <div class="task">
+                        <div class="task_number">{{task['id']}}</div>
+                        <div class="task_user">{{task['user_name']}} {{task['user_last']}}</div>
+                        <div class="task_about">{{task['about']}}</div>
+                    </div>
+                    {% endif %}
                 {% endfor %}
             {% endif %}
         </div>

@@ -1733,6 +1733,7 @@ Grant succeeded.
 Grant succeeded.
 Grant succeeded.
 Grant succeeded.
+Grant succeeded.
 Создаём пользователя технолога
 User dropped.
 User created.
