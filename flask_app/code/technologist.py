@@ -69,8 +69,9 @@ def delete_process(id):
     else:
         con_db = func.connect_to_db(func.get_role(request.cookies.get('auth_login')))
         cursor = con_db.cursor()
-        cursor.execute('DELETE FROM TCHG_PROCESS WHERE Process_ID = ' + str(id))
         cursor.execute('DELETE FROM TCHG_PROCESS_OPERATION WHERE Process_ID = ' + str(id))
+        cursor.execute('DELETE FROM COM_TP_DEV WHERE TP_ID = ' + str(id))
+        cursor.execute('DELETE FROM TCHG_PROCESS WHERE Process_ID = ' + str(id))
         con_db.commit()
         cursor.close()
         con_db.close()
@@ -354,15 +355,15 @@ def mcard(id):
 
         cursor.execute('SELECT Operation_About FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = ' + str(operation))
         operation_data.append(str(cursor.fetchall()[0][0]))
-        count_h.append(round(len(operation_data[1])*(row_height/2)) // col_width1 + 1)
+        count_h.append(len(str(operation_data[1])) // 28 + 1)
 
         cursor.execute('SELECT Tool_Name FROM TCHG_TOOLS WHERE Tool_ID = (SELECT Operation_Tools_ID FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = ' + str(operation)+')')
         operation_data.append(str(cursor.fetchall()[0][0]))
-        count_h.append(round(len(operation_data[2])*(row_height/2)) // col_width1 + 1)
+        count_h.append(len(operation_data[2]) // 28 + 1)
 
         cursor.execute('SELECT Operation_Time FROM TCHG_PROCESS_OPERATION WHERE Process_Operation_ID = ' + str(operation))
         operation_data.append(str(cursor.fetchall()[0][0]))
-        count_h.append(len(operation_data[3]) // 6 + 1)
+        count_h.append(len(str(operation_data[3])) // 6 + 1)
 
         operation_data.append(count_h)
 
@@ -374,6 +375,7 @@ def mcard(id):
     con_db.close()
     xbegin = pdf.get_x()
     j=0
+    x_mass = [col_width2+xbegin, col_width2 + col_width1 + xbegin, col_width2 + 2 * col_width1 + xbegin]
     for j in range(len(operations_data)):
         row = operations_data[j]
         y = pdf.get_y()
@@ -383,28 +385,24 @@ def mcard(id):
                 if i == 0:
                     y = pdf.get_y()
                     pdf.multi_cell(col_width2, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border=1)
-                    x = pdf.get_x()
-                    pdf.set_xy(int(x), int(y))
+                    pdf.set_xy(x_mass[i], int(y))
                 elif i == 3:
                     pdf.multi_cell(col_width2, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border=1)
                 else:
                     y = pdf.get_y()
                     pdf.multi_cell(col_width1, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border=1)
-                    x = pdf.get_x()
-                    pdf.set_xy(int(x), int(y))
+                    pdf.set_xy(x_mass[i], int(y))
             else:
                 if i == 0:
                     y = pdf.get_y()
                     pdf.multi_cell(col_width2, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border="LTR")
-                    x = pdf.get_x()
-                    pdf.set_xy(int(x), int(y))
+                    pdf.set_xy(x_mass[i], int(y))
                 elif i == 3:
                     pdf.multi_cell(col_width2, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border="LTR")
                 else:
                     y = pdf.get_y()
                     pdf.multi_cell(col_width1, row_height*(max(row[4]) - row[4][i] + 1), txt=row[i], border="LTR")
-                    x = pdf.get_x()
-                    pdf.set_xy(int(x), int(y))
+                    pdf.set_xy(x_mass[i], int(y))
     _, path = tempfile.mkstemp(suffix='.pdf')
     pdf.output(path)
 

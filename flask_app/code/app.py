@@ -221,4 +221,4 @@ def staff():
 
 #заруск Web приложения
 if __name__ == '__main__':
-  app.run(debug=True, port=80, host='ais.g')
+  app.run(debug=False, port=80, host='ais.g')
